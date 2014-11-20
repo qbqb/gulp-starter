@@ -1,0 +1,290 @@
+{% extends "layouts/layout.twig" %}
+{% block content %}
+
+<style>
+
+    ._controls {
+        position: relative;
+        margin:auto;
+        width: 800px;
+        padding: 20px;
+        margin-bottom: 500px;
+    }
+
+    ._controls .row {
+        margin-bottom: 1em;
+    }
+
+</style>
+
+<div class="_controls wrap">
+    <div class="row">
+        <input type="text" class="c-input" placeholder="Введите текст ок, хорошо">
+    </div>
+
+    <div class="row">
+        <input type="text" class="c-input c-input-fill" placeholder="Введите текст">
+    </div>
+
+    <div class="row">
+        <span class="c-input-outer">
+            <input type="text" class="c-input c-input-phone" placeholder="Введите текст">
+        </span>
+    </div>
+
+    <div class="row">
+        <span class="c-input-outer c-input-outer-fill">
+            <input type="text" class="c-input" placeholder="Введите текст">
+        </span>
+    </div>
+
+    <div class="row">
+        <span class="c-input-outer c-input-error">
+            <input type="text" class="c-input" placeholder="Введите текст">
+        </span>
+
+        <input type="text" class="c-input c-input-error" placeholder="Введите текст">
+    </div>
+
+    <div class="row">
+        <span class="c-input-outer c-input-outer-fill ">
+            <textarea class="c-input">123вфы фыв            </textarea>
+        </span>
+    </div>
+
+
+    <div class="row">
+
+        <input type="submit" class="c-btn" value="Отправить">
+          
+        <a href="#" class="c-btn">Добавить</a>
+         
+        <button type="submit" class="c-btn">
+            Добавить
+        </button>
+
+    </div>
+
+    <div class="row">
+        <button type="submit" class="c-btn btn-middle">
+            Сохранить и продолжить ввод данных
+        </button>
+    </div>
+
+    <div class="row">
+        <input type="submit" class="c-btn c-btn-simple" value="Отправить">
+    </div>
+
+    <div class="row">
+        <label class="c-label">
+            <input type="checkbox" />
+            <span class="c-label-ico">
+                <span class="ico ico-checkbox"></span>
+            </span>
+            Согласен
+        </label>
+    </div>
+
+    <div class="row">
+        <label class="c-label c-label-radio">
+            <input type="radio" />
+            <span class="c-label-ico">
+                <span class="ico ico-radio"></span>
+            </span>
+            Согласен
+        </label>
+    </div>
+
+    <div class="row">
+
+        <div class="dropdown dropdown-on">
+            <div class="dropdown-button">
+                <span class="dropdown-button-title">Периодичность </span>
+                <i class="ico ico-arr-down dropdown-arr"></i>
+            </div>
+            <ul class="dropdown-menu">
+                <li class="dropdown-menu-item" data-value="1">
+                    <span class="dropdown-menu-title">Утро</span>
+                </li>
+                <li class="dropdown-menu-item" data-value="2">
+                    <span class="dropdown-menu-title">День</span>
+                </li>
+                <li class="dropdown-menu-item" data-value="3">
+                    <span class="dropdown-menu-title">Вечер</span>
+                </li>
+                <li class="dropdown-menu-item" data-value="4">
+                    <span class="dropdown-menu-title">Ночь</span>
+                </li>
+            </ul>
+            <input class="dropdown-hidden" type="hidden" value="0">
+        </div>
+
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="dropdown dropdown-on dropdown-fill">
+            <div class="dropdown-button">
+                <span class="dropdown-button-title">Периодичность</span>
+                <i class="ico ico-arr-down dropdown-arr"></i>
+            </div>
+            <ul class="dropdown-menu">
+                <li class="dropdown-menu-item" data-value="1">
+                    <span class="dropdown-menu-title">Утро</span>
+                </li>
+                <li class="dropdown-menu-item" data-value="2">
+                    <span class="dropdown-menu-title">День</span>
+                </li>
+                <li class="dropdown-menu-item" data-value="3">
+                    <span class="dropdown-menu-title">Вечер</span>
+                </li>
+                <li class="dropdown-menu-item" data-value="4">
+                    <span class="dropdown-menu-title">Ночь</span>
+                </li>
+            </ul>
+            <input class="dropdown-hidden" type="hidden" value="0">
+        </div>
+
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="dropdown dropdown-on">
+            <div class="dropdown-button">
+                <span class="dropdown-button-title">Периодичность Периодичность Периодичность Периодичность</span>
+                <i class="ico ico-arr-down dropdown-arr"></i>
+            </div>
+            <ul class="dropdown-menu">
+                <li class="dropdown-menu-item" data-value="1">
+                    <span class="dropdown-menu-title">Периодичность Периодичность Периодичность Периодичность Периодичность </span>
+                </li>
+                <li class="dropdown-menu-item" data-value="2">
+                    <span class="dropdown-menu-title">День</span>
+                </li>
+                <li class="dropdown-menu-item" data-value="3">
+                    <span class="dropdown-menu-title">Вечер</span>
+                </li>
+                <li class="dropdown-menu-item" data-value="4">
+                    <span class="dropdown-menu-title">Ночь</span>
+                </li>
+            </ul>
+            <input class="dropdown-hidden" type="hidden" value="0">
+        </div>
+
+    </div>
+
+    <div class="row">
+        <a href="#fancy-in" class="fancybox">Fancy Button</a>
+        <div id="fancy-in" style="display: none; width: 400px; padding:20px">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id reprehenderit quae eius libero cupiditate. Placeat beatae, veniam minus facilis excepturi, impedit eligendi nostrum error at qui fugit est, iusto cum!
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="c-slider-outer">
+            <ul class="c-slider c-slider-on c-slider-test">
+                <li class="c-slider-item c-slider-item-1">
+                </li>
+                <li class="c-slider-item c-slider-item-2">
+                </li>
+                <li class="c-slider-item c-slider-item-3">
+                </li>
+                <li class="c-slider-item c-slider-item-4">
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="c-slider-outer">
+            <ul class="c-slider c-slider-fade-on c-slider-test">
+                <li class="c-slider-item c-slider-item-1">
+                </li>
+                <li class="c-slider-item c-slider-item-2">
+                </li>
+                <li class="c-slider-item c-slider-item-3">
+                </li>
+                <li class="c-slider-item c-slider-item-4">
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="c-tabs c-tabs-on">
+            <ul class="c-tabs-controls">
+                <li><a href="#tab-1">Tab 1</a></li>
+                <li><a href="#tab-2">Tab 2</a></li>
+                <li><a href="#tab-3">Tab 3</a></li>
+            </ul>
+            <div id="tab-1" class="c-tabs-content">
+                <strong>Content 1</strong>
+            </div>
+            <div id="tab-2" class="c-tabs-content">
+                <strong>Content 2</strong>
+            </div>
+            <div id="tab-3" class="c-tabs-content">
+                <strong>Content 3</strong>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="toggle-box">
+            <div>
+                <a href="#" class="toggle-button" data-toggle-title-open="Развернуть" data-toggle-title-close="Свернуть">
+                    <span class="toggle-button-title">Развернуть</span>
+                </a>
+{#                 <a href="#" class="toggle-button-open"><span class="toggle-button-title">Развернуть</span></a>
+                <a href="#" class="toggle-button-close"><span class="toggle-button-title">Свернуть</span></a> #}
+            </div>
+            <div class="toggle-content">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus dolore velit totam iste cum numquam eum illum quis rem recusandae doloribus officia aliquam quia nam, voluptate commodi. Exercitationem, dolorem, reiciendis.
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+<!--         <div id="map" class="c-map">
+            {# Map Init #}
+        </div> -->
+
+    </div>
+
+
+
+    <div class="row">
+
+        <div id="map_canvas" class="c-map">
+            {# Map Init #}
+        </div>
+
+        <br>
+
+        <a href="#" class="map-btn">Go to 1</a>
+
+    </div>
+
+
+</div>
+
+
+
+
+
+{% endblock %}
