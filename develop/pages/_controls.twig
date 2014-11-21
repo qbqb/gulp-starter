@@ -18,12 +18,19 @@
 </style>
 
 <div class="_controls wrap">
+
     <div class="row">
-        <input type="text" class="c-input" placeholder="Введите текст ок, хорошо">
+        <span class="c-input-outer">
+            <input type="text" class="c-input" placeholder="Введите текст">
+        </span>
     </div>
 
     <div class="row">
-        <input type="text" class="c-input c-input-fill" placeholder="Введите текст">
+        <input type="text" class="c-input" placeholder="Введите текст">
+    </div>
+
+    <div class="row">
+        <input type="text" class="c-input c-input-fill datepicker" placeholder="Введите текст">
     </div>
 
     <div class="row">
@@ -48,7 +55,7 @@
 
     <div class="row">
         <span class="c-input-outer c-input-outer-fill ">
-            <textarea class="c-input">123вфы фыв            </textarea>
+            <textarea class="c-input"></textarea>
         </span>
     </div>
 
@@ -177,6 +184,87 @@
 
     </div>
 
+
+    <div class="row">
+
+        <div class="dropdown dropdown-on dropdown-multi">
+            <div class="dropdown-button">
+                <span class="dropdown-button-title">Периодичность </span>
+                <i class="ico ico-arr-down dropdown-arr"></i>
+            </div>
+
+            <ul class="dropdown-menu">
+                <li class="dropdown-menu-item" data-value="morning">
+                    <label class="c-label">
+                        <input type="checkbox">
+                        <span class="c-label-ico">
+                            <span class="ico ico-checkbox"></span>
+                        </span>
+                        Утро
+                    </label>
+                </li>
+                <li class="dropdown-menu-item" data-value="daytime">
+                    <label class="c-label">
+                        <input type="checkbox">
+                        <span class="c-label-ico">
+                            <span class="ico ico-checkbox"></span>
+                        </span>
+                        День
+                    </label>
+                </li>
+                <li class="dropdown-menu-item" data-value="evening">
+                    <label class="c-label">
+                        <input type="checkbox">
+                        <span class="c-label-ico">
+                            <span class="ico ico-checkbox"></span>
+                        </span>
+                        Вечер
+                    </label>
+                </li>
+                <li class="dropdown-menu-item" data-value="night">
+                    <label class="c-label">
+                        <input type="checkbox">
+                        <span class="c-label-ico">
+                            <span class="ico ico-checkbox"></span>
+                        </span>
+                        Ночь
+                    </label>
+                </li>
+            </ul>
+            <input class="dropdown-hidden" type="hidden" value="">
+        </div>
+
+
+    </div>
+
+    <div class="row">
+
+        <div class="dropdown dropdown-on dropdown-lang">
+            <div class="dropdown-button">
+                <span class="dropdown-button-title">Язык</span>
+                <i class="ico ico-arr-down dropdown-arr"></i>
+            </div>
+            <ul class="dropdown-menu">
+                <li class="dropdown-menu-item" data-value="1">
+                    <a href="/_controls.html" class="dropdown-menu-title">Русский</a>
+                </li>
+                <li class="dropdown-menu-item" data-value="2">
+                    <a href="/_controls.html" class="dropdown-menu-title">Английский</a>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
     <div class="row">
         <a href="#fancy-in" class="fancybox">Fancy Button</a>
         <div id="fancy-in" style="display: none; width: 400px; padding:20px">
@@ -258,17 +346,9 @@
 
     </div>
 
-    <div class="row">
-
-<!--         <div id="map" class="c-map">
-            {# Map Init #}
-        </div> -->
-
-    </div>
-
-
 
     <div class="row">
+
 
         <div id="map_canvas" class="c-map">
             {# Map Init #}
@@ -276,9 +356,410 @@
 
         <br>
 
-        <a href="#" class="map-btn">Go to 1</a>
+        <a href="#" id="map-btn-1">Go to 1</a>
+        <a href="#" id="map-btn-2">Add Markers 1</a>
+        <a href="#" id="map-btn-3">Add Markers 2</a>
+        <a href="#" id="map-btn-4">Remove and Add Markers 1</a>
+        <a href="#" id="map-btn-5">Remove Markers</a>
+
 
     </div>
+
+    <div class="row">
+        <br><br>
+
+        <div class="c-range-outer-full">
+            <input type="text" class="c-range" value="" />
+        </div>
+
+        <br><br>
+
+        <div class="c-range-outer-full">
+            <input type="text" class="c-range-double" value="" />
+        </div>
+
+        <br><br>
+        <div class="c-range-outer-full">
+            <input type="text" class="c-range-double" value="" />
+        </div>
+
+        <br><br><br>
+
+        <div class="c-range-outer-simple">
+            <input type="text" class="c-range" value="" />
+        </div>
+
+        <br><br><br>
+
+        <div class="c-range-outer-simple">
+            <input type="text" class="c-range-double" value="" />
+            <br>
+            <input type="text" class="c-input c-range-output c-range-output-min" >
+            <input type="text" class="c-input c-range-output c-range-output-max" >
+        </div>
+
+    </div>
+
+
+
+    <div class="row">
+
+        <br>
+
+        <ul class="c-pager">
+            <li><a href="#"> < </a></li>
+            <li><a href="#"> 1 </a></li>
+            <li><a href="#"> 2 </a></li>
+            <li><a href="#"> 3 </a></li>
+            <li><a href="#"> > </a></li>
+        </ul>
+    </div>
+
+
+    <br><br><br><br>
+
+
+    <div class="row">
+
+        <form style="width: 500px;">
+
+            <h3 class="form-hd">
+                Форма обратной связи
+            </h3>
+
+            <div class="form-row">
+                <label for="" class="form-label">
+                    Имя
+                </label>
+                <span class="c-input-outer c-input-outer-fill">
+                    <input type="text" class="c-input" name="" placeholder="Введите текст">
+                </span>
+            </div>
+
+            <div class="form-row">
+                <label for="" class="form-label">
+                    Фамилия
+                </label>
+                <span class="c-input-outer c-input-outer-fill">
+                    <input type="text" class="c-input" name="" placeholder="Введите текст">
+                </span>
+                <div class="form-tip">
+                    Предполагаемый текст подсказки
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="" class="form-label">
+                    Отчество
+                </label>
+                <span class="c-input-outer c-input-outer-fill c-input-error">
+                    <input type="text" class="c-input" name="" placeholder="Введите текст">
+                </span>
+                <div class="form-tip form-tip-error">
+                    Предполагаемый текст ошибки
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="" class="form-label">
+                    Телефон
+                </label>
+                <span class="c-input-outer c-input-outer-fill">
+                    <input type="text" class="c-input c-input-phone" name="" placeholder="Введите текст">
+                </span>
+            </div>
+
+            <div class="form-row">
+                <ul class="c-colgroup">
+                    <li class="c-col c-col-1">
+                        <label for="" class="form-label">
+                            E-mail
+                        </label>
+                        <span class="c-input-outer c-input-outer-fill">
+                            <input type="text" class="c-input" name="" placeholder="Введите текст">
+                        </span>
+                    </li>
+                    <li class="c-col c-col-2">
+                        <label for="" class="form-label">
+                            E-mail
+                        </label>
+                        <span class="c-input-outer c-input-outer-fill">
+                            <input type="text" class="c-input" name="" placeholder="Введите текст">
+                        </span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="form-row">
+                <ul class="c-colgroup">
+                    <li class="c-col_3 c-col_3-1">
+                        <label for="" class="form-label">
+                            E-mail
+                        </label>
+                        <span class="c-input-outer c-input-outer-fill">
+                            <input type="text" class="c-input" name="" placeholder="Введите текст">
+                        </span>
+                    </li>
+                    <li class="c-col_3 c-col_3-2">
+                        <label for="" class="form-label">
+                            E-mail
+                        </label>
+                        <span class="c-input-outer c-input-outer-fill">
+                            <input type="text" class="c-input" name="" placeholder="Введите текст">
+                        </span>
+                    </li>
+                    <li class="c-col_3 c-col_3-3">
+                        <label for="" class="form-label">
+                            E-mail
+                        </label>
+                        <span class="c-input-outer c-input-outer-fill">
+                            <input type="text" class="c-input" name="" placeholder="Введите текст">
+                        </span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="form-row">
+                <label for="" class="form-label">
+                    О себе
+                </label>
+                <span class="c-input-outer c-input-outer-fill">
+                    <textarea class="c-input c-input-fill"></textarea>
+                </span>
+            </div>
+
+            <div class="form-row">
+                <label for="" class="form-label-inline">
+                    Пароль
+                </label>
+                <span class="c-input-outer">
+                    <input type="password" class="c-input" name="" placeholder="Введите текст">
+                </span>
+            </div>
+
+            <div class="form-row">
+                <label class="c-label">
+                    <div class="c-label-pic">
+                        <input type="checkbox" />
+                        <span class="c-label-ico">
+                            <span class="ico ico-checkbox"></span>
+                        </span>
+                    </div>
+                    <div class="c-label-desc">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt quasi ipsa ea, et alias architecto, iste, ipsum velit esse soluta rem. Recusandae beatae quaerat, praesentium dolorum incidunt suscipit tenetur eius.</div>
+                </label>
+            </div>
+
+            <div class="form-row">
+                <div class="c-inline">
+                    <label class="c-label c-label-radio">
+                        <div class="c-label-pic">
+                            <input type="radio" name="sex" />
+                            <span class="c-label-ico">
+                                <span class="ico ico-radio"></span>
+                            </span>
+                        </div>
+                        <div class="c-label-desc">
+                            Мужской
+                        </div>
+                    </label>
+                </div>
+                <div class="c-inline">
+                    <label class="c-label c-label-radio">
+                        <div class="c-label-pic">
+                            <input type="radio" name="sex" />
+                            <span class="c-label-ico">
+                                <span class="ico ico-radio"></span>
+                            </span>
+                        </div>
+                        <div class="c-label-desc">
+                            Женский
+                        </div>
+                    </label>
+                </div>
+                <div class="c-inline">
+                    <label class="c-label c-label-radio">
+                        <div class="c-label-pic">
+                            <input type="radio" name="sex" />
+                            <span class="c-label-ico">
+                                <span class="ico ico-radio"></span>
+                            </span>
+                        </div>
+                        <div class="c-label-desc">
+                            Любой
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="dropdown dropdown-on ">
+                    <div class="dropdown-button">
+                        <span class="dropdown-button-title">Периодичность</span>
+                        <i class="ico ico-arr-down dropdown-arr"></i>
+                    </div>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-menu-item" data-value="1">
+                            <span class="dropdown-menu-title">Утро</span>
+                        </li>
+                        <li class="dropdown-menu-item" data-value="2">
+                            <span class="dropdown-menu-title">День</span>
+                        </li>
+                        <li class="dropdown-menu-item" data-value="3">
+                            <span class="dropdown-menu-title">Вечер</span>
+                        </li>
+                        <li class="dropdown-menu-item" data-value="4">
+                            <span class="dropdown-menu-title">Ночь</span>
+                        </li>
+                    </ul>
+                    <input class="dropdown-hidden" type="hidden" value="0">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="dropdown dropdown-on dropdown-fill">
+                    <div class="dropdown-button">
+                        <span class="dropdown-button-title">ПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичность</span>
+                        <i class="ico ico-arr-down dropdown-arr"></i>
+                    </div>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-menu-item" data-value="1">
+                            <span class="dropdown-menu-title">Утро</span>
+                        </li>
+                        <li class="dropdown-menu-item" data-value="2">
+                            <span class="dropdown-menu-title">День</span>
+                        </li>
+                        <li class="dropdown-menu-item" data-value="3">
+                            <span class="dropdown-menu-title">Вечер</span>
+                        </li>
+                        <li class="dropdown-menu-item" data-value="4">
+                            <span class="dropdown-menu-title">Ночь</span>
+                        </li>
+                        <li class="dropdown-menu-item" data-value="1">
+                            <span class="dropdown-menu-title">Утро</span>
+                        </li>
+                        <li class="dropdown-menu-item" data-value="2">
+                            <span class="dropdown-menu-title">День</span>
+                        </li>
+                        <li class="dropdown-menu-item" data-value="3">
+                            <span class="dropdown-menu-title">Вечер</span>
+                        </li>
+                        <li class="dropdown-menu-item" data-value="4">
+                            <span class="dropdown-menu-title">Ночь</span>
+                        </li>
+                    </ul>
+                    <input class="dropdown-hidden" type="hidden" value="0">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="dropdown dropdown-on dropdown-multi">
+                    <div class="dropdown-button">
+                        <span class="dropdown-button-title">Периодичность </span>
+                        <i class="ico ico-arr-down dropdown-arr"></i>
+                    </div>
+
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-menu-item" data-value="morning">
+                            <label class="c-label">
+                                <div class="c-label-pic">
+                                    <input type="checkbox" />
+                                    <span class="c-label-ico">
+                                        <span class="ico ico-checkbox"></span>
+                                    </span>
+                                </div>
+                                <div class="c-label-desc">
+                                    Утро
+                                </div>
+                            </label>
+                        </li>
+                        <li class="dropdown-menu-item" data-value="daytime">
+                            <label class="c-label">
+                                <div class="c-label-pic">
+                                    <input type="checkbox" />
+                                    <span class="c-label-ico">
+                                        <span class="ico ico-checkbox"></span>
+                                    </span>
+                                </div>
+                                <div class="c-label-desc">
+                                    День
+                                </div>
+                            </label>
+                        </li>
+                        <li class="dropdown-menu-item" data-value="evening">
+                            <label class="c-label">
+                                <div class="c-label-pic">
+                                    <input type="checkbox" />
+                                    <span class="c-label-ico">
+                                        <span class="ico ico-checkbox"></span>
+                                    </span>
+                                </div>
+                                <div class="c-label-desc">
+                                    Вечер
+                                </div>
+                            </label>
+                        </li>
+                        <li class="dropdown-menu-item" data-value="night">
+                            <label class="c-label">
+                                <div class="c-label-pic">
+                                    <input type="checkbox" />
+                                    <span class="c-label-ico">
+                                        <span class="ico ico-checkbox"></span>
+                                    </span>
+                                </div>
+                                <div class="c-label-desc">
+                                    Ночь
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+                    <input class="dropdown-hidden" type="hidden" value="">
+                </div>
+            </div>
+
+            <div class="form-row">
+
+                <div class="dropdown dropdown-on dropdown-lang">
+                    <div class="dropdown-button">
+                        <span class="dropdown-button-title">Язык</span>
+                        <i class="ico ico-arr-down dropdown-arr"></i>
+                    </div>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-menu-item" data-value="1">
+                            <a href="/_controls.html" class="dropdown-menu-title">Русский</a>
+                        </li>
+                        <li class="dropdown-menu-item" data-value="2">
+                            <a href="/_controls.html" class="dropdown-menu-title">Английский</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+                <a href="" class="c-btn">
+                    Загрузить файл
+                </a>
+            </div>
+
+
+            <div class="form-row-last">
+                <input type="submit" class="c-btn" value="Отправить">
+            </div>
+
+        </form>
+
+
+
+
+
+
+    </div>
+
+
+
+
 
 
 </div>

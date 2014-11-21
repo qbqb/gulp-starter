@@ -132,11 +132,11 @@ gulp.task('c', function(cb) {
 
 //Следим
 gulp.task("watch", function(){
-    gulp.watch('develop/assets/less/**/*', ['less']);
+    gulp.watch(['develop/assets/less/**/*', '!develop/assets/less/libs/bootstrap/**/*', '!develop/assets/less/libs/fonts/**/*'], ['less']);
     gulp.watch('develop/**/*.twig', ['twig-compile']);
     gulp.watch('develop/assets/images/**/*', ['images']);
     gulp.watch('develop/assets/images/sprite/*.png', ['sprite']);
-    gulp.watch('develop/assets/**/*', ['js']);
+    gulp.watch(['develop/assets/js/**/*', '!develop/assets/js/libs/fancybox/**/*'], ['js']);
 });
 
 gulp.task('build', ['twig-compile', 'less', 'images', 'js', 'sprite']);

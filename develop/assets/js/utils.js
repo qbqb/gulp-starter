@@ -9,21 +9,23 @@
     */
     jQuery.fn.stickTheFooter = function ( options ) {
         var o = $.extend({
-            header   :  $('.pageheader'),
+            header   :  $('#header'),
             content  :  $('#content'),
-            footer   :  $('.footer-outer'),
+            footer   :  $('#footer'),
             offset   :  0
         }, options);
         return this.each(function(event){
-            var headerHeight   =  o.header.eq(0).height(),
-                footerHeight   =  o.footer.eq(0).height();
+            var headerHeight   =  o.header.eq(0).outerHeight(),
+                footerHeight   =  o.footer.eq(0).outerHeight();
             function init(){
-               o.content.css('minHeight', $(window).height() - footerHeight - headerHeight + o.offset);
+               o.content.css('minHeight', $(window).outerHeight() - footerHeight - headerHeight + o.offset);
             }
             init();
             $(window).resize(init);
         });
     }
+    /* . */
+
 
 
     /*!
@@ -43,14 +45,18 @@
             itemTitle: '.dropdown-menu-title',
             inputHidden: '.dropdown-hidden',
             active:'active',
-            dataAttr:'value'
+            dataAttr:'value',
         }
 
         var o = $.extend(defaults, options);
 
         var $el = $(this);
 
+
+
         $(document.body).on('click', $el.selector+" "+o.button, function(e){
+
+
 
             var $dropdown = $(this).closest($el.selector);
             var $menu  = $dropdown.find(o.menu);
@@ -81,14 +87,125 @@
             var $menu  = $dropdown.find(o.menu);
             var $buttonTitle = $dropdown.find(o.buttonTitle);
             var $inputHidden = $dropdown.find(o.inputHidden);
+            var $checkbox;
+            var level;
+            var i = 0;
 
-            $menu.hide();
-            $buttonTitle.html( $(this).find(o.itemTitle).html() );
-            $inputHidden.val( $(this).data(o.dataAttr) );
-            $dropdown.removeClass(o.active);
-            $dropdown.addClass('dropdown-changed');
+            if( $dropdown.hasClass('dropdown-multi') ) {
 
-            e.preventDefault();
+                if ( $inputHidden.val() == "" ){
+                    var hiddenArr = [];
+                } else {
+                    var hiddenArr = $inputHidden.val().split(',');
+                }
+
+                $(o.menu).hide();
+                $menu.show();
+                $dropdown.addClass('dropdown-changed');
+
+                $checkbox = $(this).find("input[type='checkbox']");
+                $checkbox.prop("checked") == false ? $checkbox.prop("checked", true) : $checkbox.prop("checked", false);
+
+
+                //Если выбрали главный элемент уровня
+                if( $(this).hasClass('dropdown-menu-item-higher') ) {
+                    level = $(this).data('level');
+                    if( $checkbox.prop("checked") == false ){
+                        setSubLevel(level,false);
+                    } else {
+                        setSubLevel(level,true);
+                    }
+                }
+
+                function setSubLevel(level, boo){
+                    $menu
+                        .find('.dropdown-menu-item-sub')
+                        .filter("[data-level = "+level+"]")
+                        .each(function(){
+                            $(this).find("input[type='checkbox']").prop("checked", boo);
+                        });
+                }
+
+
+                //Если выбрали подуровень
+                if( $(this).hasClass('dropdown-menu-item-sub') ) {
+                    level = $(this).data('level');
+                    var arr = [];
+
+                    $menu
+                        .find('.dropdown-menu-item-sub')
+                        .filter("[data-level = "+level+"]")
+                        .each(function(){
+                            if( $(this).find("input[type='checkbox']").prop("checked") == false ) {
+                                arr.push(0);
+                            } else {
+                                arr.push(1);
+                            }
+                        });
+
+                        if (arr.indexOf( 0 ) < 0 ) {
+                            setHigherLevel(level, true);
+                        } else if ( arr.indexOf( 0 ) >= 0  ) {
+                            setHigherLevel(level, false);
+                        }
+
+                }
+
+                function setHigherLevel(level, boo){
+                    $menu
+                        .find('.dropdown-menu-item-higher')
+                        .filter("[data-level = "+level+"]").eq(0)
+                        .find("input[type='checkbox']").prop("checked", boo);
+                }
+
+
+
+                //Обновить значения
+                $inputHidden.val(''); hiddenArr = [];
+                $menu.find(o.item).each(function(){
+                    if ( $(this).find("input[type='checkbox']").prop("checked") == true ) {
+                        hiddenArr.push( $(this).data('value') );
+                    }
+                });
+                $inputHidden.val( hiddenArr );
+
+
+                //Обновили счетчик
+                $menu.find(o.item).each(function(){
+                    if( $(this).find("input[type='checkbox']").prop("checked") == true ){
+                        i++;
+                    }
+                });
+
+                if ( i > 0) {
+                    $buttonTitle
+                        .find('.dropdown-button-count')
+                        .html(" ("+i+")")
+                } else {
+                    $buttonTitle
+                        .find('.dropdown-button-count')
+                        .html("");
+
+                    $dropdown.removeClass('dropdown-changed');
+                }
+
+
+                e.preventDefault();
+
+
+
+            } else if ( $dropdown.hasClass('dropdown-lang') ) {
+                $menu.hide();
+                $dropdown.removeClass(o.active);
+                $dropdown.addClass('dropdown-changed');
+            } else {
+                $menu.hide();
+                $buttonTitle.html( $(this).find(o.itemTitle).html() );
+                $inputHidden.val( $(this).data(o.dataAttr)).change();
+                $dropdown.removeClass(o.active);
+                $dropdown.addClass('dropdown-changed');
+                e.preventDefault();
+            }
         });
 
         function hideDropdown(e){
@@ -98,21 +215,67 @@
             $( $el.selector ).removeClass(o.active);
         }
 
-        return this.each(function(){
 
-            $(this).data("dropdownOptions", o);
-            $(this).data("dropdownButtonTitle", $(this).find(o.buttonTitle).html() );
-            $buttonTitle = $(this).find(o.buttonTitle);
-            $inputHidden = $(this).find(o.inputHidden);
-            if( $inputHidden.val() ){
-                $item = $(this).find(o.item).filter("[data-"+o.dataAttr+" = "+$inputHidden.val()+" ]");
-                $buttonTitle.html( $item.html() )
+
+
+        this.refresh = function(el){
+
+            var $el = $(el);
+
+            $el.each(function(){
+
+                var $thisEl = $(this),
+                    $thisMenu = $thisEl.find('.dropdown-menu'),
+                    $thisInputHidden = $thisEl.find('.dropdown-hidden'),
+                    $thisInputHiddenArr = [],
+                    $thisItem = $thisEl.find('.dropdown-menu-item'),
+                    $thisButtonTitle = $thisEl.find('.dropdown-button-title'),
+                    $thisItemHtml;
+
+                if ( hasValue( $thisEl ) ) {
+                    if ( $thisEl.hasClass('dropdown-multi') ) {
+                        $thisInputHiddenArr = $thisInputHidden.val().split(',');
+                        $thisInputHidden.val('');
+                        for (var i = 0; i < $thisInputHiddenArr.length; i++) {
+                            $thisItem.each(function(){
+                                if( $(this).data('value') == $thisInputHiddenArr[i] ){
+                                    $(this).trigger('click');
+                                    $thisMenu.hide();
+                                }
+                            });
+                        }
+                    } else {
+                        $thisItem.each(function(){
+                            if( $(this).data('value') == $thisInputHidden.val() )
+                               $thisEl.addClass('dropdown-changed');
+                        });
+                        $thisItemHtml = $thisItem.filter(" [ data-value = " + $thisInputHidden.val() + " ] ").eq(0).html();
+                        $thisButtonTitle.html( $thisItemHtml );
+                    }
+                }
+
+            });
+
+            function hasValue(el){
+                var val = el.find('.dropdown-hidden').val();
+                return !val || /^\s*$/.test(val) ? false : true;
             }
 
+        };
 
+        this.refresh('.dropdown');
+
+
+
+        return this.each(function(){
+            var $el = $(this);
+            $(this).data("dropdownOptions", o);
+            $(this).data("dropdownButtonTitle", $(this).find(o.buttonTitle).html() );
         });
 
+
     }
+    /* . */
 
 
 
@@ -271,111 +434,7 @@
 
 
 
-    /*!
-    * jQuery createMap plugin
-    *
-    * Copyright (c) 2014
-    *
-    * @version 1.0.0
-    */
-    jQuery.fn.createMap = function ( options ) {
 
-        var defaults = {
-            zoom:10,
-            scrollwheel: false,
-            draggable:true,
-            centerY:59.9174454,
-            centerX:30.3250575,
-
-            places: [
-                ['St. Petersburg', 59.9174454,30.3250575]
-            ],
-
-            styles: null,
-            stylesName:"Styled Map",
-
-            markerImgUrl:null,
-            markerWidth:null, //ширина
-            markerHeight:null, //высота
-            markerOffsetX:null, //расстояние слева до главной точки
-            markerOffsetY:null, //расстояние сверху до главной точки
-
-            animation: null,
-
-            popupMode:true,
-
-            actions:function(){}
-        }
-
-        var o = $.extend(defaults, options),
-            id = $(this).selector.substr(1, $(this).selector.length),
-            styles = o.styles,
-            map, cm_mapMarkers = [];
-
-        var mapOptions = {
-            zoom: o.zoom,
-            scrollwheel: o.scrollwheel,
-            draggable: o.draggable,
-            center: new google.maps.LatLng(o.centerY,o.centerX),
-            mapTypeControlOptions: {
-              mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
-            }
-        };
-
-        function setMarkers(map, locations) {
-            var latlngbounds = new google.maps.LatLngBounds();
-            var infowindow = new google.maps.InfoWindow();
-            if ( o.markerImgUrl ) {
-                var image = new google.maps.MarkerImage(o.markerImgUrl,
-                    new google.maps.Size(o.markerWidth, o.markerHeight),
-                    new google.maps.Point(0, 0),
-                    new google.maps.Point(o.markerOffsetX, o.markerOffsetY)
-                );
-            }
-            for (var i = 0; i < o.places.length; i++) {
-                var myLatLng = new google.maps.LatLng(locations[i][1], locations[i][2]);
-                latlngbounds.extend(myLatLng);
-                var marker = new google.maps.Marker({
-                   position: myLatLng,
-                   map: map,
-                   icon: o.markerImgUrl ? image : null,
-                   animation: o.animation,
-                   title: locations[i][0],
-                });
-                cm_mapMarkers.push(marker);
-                if( o.popupMode ){
-                    google.maps.event.addListener(marker, 'click', function() {
-                         infowindow.setContent("<div class='c-map-popup'>"+this.title+"</div>");
-                         infowindow.open(map,this);
-                    });
-                }
-            }
-        };
-
-        return this.each(function(){
-            map = new google.maps.Map(document.getElementById(id),
-              mapOptions); //Создаем карту
-
-            setMarkers(map, o.places); //Устанавливаем маркеры
-
-            if( styles ){ //Добавляем стили
-                var styledMap = new google.maps.StyledMapType(styles,
-                  {name: o.stylesName});
-                map.mapTypes.set('map_style', styledMap);
-                map.setMapTypeId('map_style');
-            }
-
-            o.actions(map, cm_mapMarkers);
-
-        });
-
-
-    /*____End____*/ }
-
-
-
-
-
-/*______________End_______________*/ })(jQuery, window);
+})(jQuery, window); /*______________End_______________*/
 
 

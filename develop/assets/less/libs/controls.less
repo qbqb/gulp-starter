@@ -10,20 +10,43 @@ input, button, select, textarea {font-family: @font-family; font-size: @font-siz
 // Input Text
 // =============================================
 
+.c-input-placeholder-transition {
+     transition:        color 100ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
 .c-input {
 
     outline:none;
     font-size: @font-size;
 
-    padding: 0 .5em 0 .5em;
-    height: 2em;
-    border:1px solid #e4e4e4;
-    width: 15em;
+    padding: 0 .9em 0 .9em;
+    height: 2.7em;
+    width: 20em;
+
     border-radius: 4px;
+    border:1px solid rgba(0,0,0,.2);
+
+    transition: all 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     &.c-input-fill {
         width: 100%;
     }
+
+    &:hover {
+        //border:1px solid rgba(0,0,0,.4);
+    }
+
+    &:-moz-placeholder            { .c-input-placeholder-transition; }
+    &::-moz-placeholder           { .c-input-placeholder-transition; }
+    &:-ms-input-placeholder       { .c-input-placeholder-transition; }
+    &::-webkit-input-placeholder  { .c-input-placeholder-transition; }
+
+    &:focus {
+        .placeholder(#cccaca);
+        //box-shadow:0px 0px 8px rgba(138,150,237,.5);
+        //border:1px solid rgba(0,0,0,.6);
+    }
+
 
 }
 
@@ -49,7 +72,7 @@ input, button, select, textarea {font-family: @font-family; font-size: @font-siz
 
 textarea.c-input {
     resize:none;
-    height: 200px;
+    height: 8em;
     padding-top: 8px;
 }
 
@@ -57,7 +80,7 @@ textarea.c-input {
 .c-input-outer.c-input-error .c-input,
 .c-input.c-input-error
 {
-    border: 2px solid #FF4242;
+    border: 1px solid #FF4242;
     .placeholder(#FF4242);
 }
 
@@ -90,7 +113,6 @@ textarea.c-input {
     border-radius: 4px;
     padding: 10px 25px 10px 25px;
     max-width: 220px;
-    -webkit-transition: background-color .2s ease;
     transition:         background-color .2s ease;
 
     &:hover, &.btn-hover {
@@ -142,11 +164,27 @@ textarea.c-input {
     -moz-user-select: none;
     -webkit-user-select: none;
 
+    display: inline-block;
+    margin-left: -1px;
+
     input[type="checkbox"],
     input[type="radio"]
     {
         display: none;
     }
+
+    .c-label-pic {
+        float: left;
+        .media;
+        margin-right: .5em;
+    }
+
+    .c-label-desc {
+        .media;
+        padding-top: 1px;
+    }
+
+
 
     .c-label-ico {
         display: inline-block;
@@ -156,7 +194,9 @@ textarea.c-input {
         border: 2px solid #e4e4e4;
         vertical-align: middle;
         border-radius: 2px;
-        top: -2px;
+        top: 0px;
+        left: 1px;
+
         position: relative;
         text-align: center;
         .ico {
@@ -183,7 +223,7 @@ textarea.c-input {
             border-radius: 100%;
 
             .ico {
-                top: -2px;
+                top: -3px;
                 left: 0px;
             }
 
@@ -215,11 +255,13 @@ textarea.c-input {
         width: 100%;
     }
 
+    .backface-visibility(hidden);
+
 
 }
 .dropdown-button {
-    border: 1px solid #e4e4e4;
-    padding: 7px 30px 5px 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 13px 30px 6px .9em;
     background-color: #fff;
     border-radius: 4px;
     z-index: 2;
@@ -227,7 +269,26 @@ textarea.c-input {
 
 }
 .dropdown-button-title {
+    height: 20px;
+    overflow: hidden;
+    display: inline-block;
+    width: 100%;
+    position: relative;
 
+    &:after {
+
+        content: " ";
+        display:  block;
+        position: absolute;
+        height: 100%;
+        top: 0;
+        right: 0;
+        z-index: 2;
+
+        width:  40px;
+        #gradient > .horizontal(rgba(0,0,0,0), rgba(255,255,255,1));
+
+    }
 }
 
 .dropdown-menu {
@@ -238,7 +299,7 @@ textarea.c-input {
     width: 100%;
     overflow: auto;
     max-height: 250px;
-    border: 1px solid #e4e4e4;
+    border: 1px solid rgba(0, 0, 0, 0.2);
     border-top: none;
     background-color: #fff;
     margin-top: -2px;
@@ -246,7 +307,8 @@ textarea.c-input {
     border-radius: 0px 0px 4px 4px;
 }
 .dropdown-menu-item {
-    padding: 5px 10px 5px 10px;
+    padding: 12px 10px 11px 10px;
+    background-color: #fff;
     &:hover {
         background-color: #EBEBEB;
     }
@@ -260,6 +322,29 @@ textarea.c-input {
     right: 10px;
     margin-top: -2px;
 }
+
+.dropdown-multi {
+    .dropdown-menu-item {
+        padding: 0;
+    }
+    .c-label {
+        display: block;
+        width: 100%;
+        padding: 12px 10px 11px 10px;
+    }
+}
+
+.dropdown-lang {
+    .dropdown-menu-item {
+        padding: 0;
+    }
+    a {
+        display: block;
+        width: 100%;
+        padding: 12px 10px 11px 10px;
+    }
+}
+
 
 
 
@@ -358,6 +443,11 @@ textarea.c-input {
 // Map
 // =============================================
 
+
+// =============================================
+// Map
+// =============================================
+
 .c-map {
     width: 100%;
     height: 500px;
@@ -365,13 +455,290 @@ textarea.c-input {
 
 .c-map-popup {
     display: block;
-    white-space: nowrap;
+    // white-space: nowrap;
     padding-right:1px;
+    max-width: 223px;
+    line-height:1.20;
+    font-family: @font-family;
+
 }
+
+.c-map-popup-outer {
+    .clearfix();
+    padding: 10px;
+    border: 1px solid #e4e4e4;
+    border-radius: 6px;
+    display: inline-block;
+
+}
+
+.c-map-popup-pic {
+    margin-bottom: 3px;
+    display: none;
+
+    img {
+        max-width: 50%;
+    }
+
+}
+.c-map-popup-title {
+    font-size: 16px !important;
+    color: #181818;
+
+
+    // white-space: normal;
+
+
+}
+.c-map-popup-price {
+    color: #e7830b;
+    font-size: 15px;
+
+    // white-space: normal;
+}
+.c-map-popup-address {
+    color: #6f6f6f;
+    font-size: 13px;
+
+    // white-space: normal;
+}
+
+.gm-style-iw {
+    height: 100% !important;
+    overflow: hidden !important;
+}
+
+.gm-style-iw > div {
+    height: auto !important;
+    width: auto !important;
+    overflow: visible !important;
+}
+.gm-style-iw > div > div {
+    overflow: visible !important;
+}
+
+
 
 
 // =============================================
 // Pager
 // =============================================
 
-.c-pager .hidden {display:none;}
+.c-pager {
+
+    .unlist;
+    .clearfix();
+
+    li {
+        float: left;
+
+
+        &.current {
+            a {
+                background-color: #bbbdbe;
+            }
+
+        }
+
+
+    }
+    a {
+        display: inline-block;
+        width:       30px;
+        height:      30px;
+        line-height: 30px;
+        background-color: #78afdf;
+        color: #fff;
+        text-align: center;
+        border-radius: 100%;
+
+        margin-right: 6px;
+        text-decoration: none;
+        -webkit-transition: all .2s ease;
+                transition: all .2s ease;
+        &:hover {
+            background-color: #3788D0;
+        }
+
+    }
+
+    .hidden {display:none;}
+}
+
+
+
+// =============================================
+// Range Slider
+// =============================================
+
+
+.irs {
+    height: 55px;
+    padding-top: 10px;
+}
+
+.irs-line {
+    border-radius: 10px;
+    background-color: #E6E6E6;
+    height: 16px;
+    cursor: pointer;
+}
+
+.irs-slider {
+    .m-bgc-red;
+    border-radius: 100%;
+    width:  23px;
+    height: 23px;
+    top:32px;
+    cursor: pointer;
+}
+
+.irs-from, .irs-to, .irs-single {
+    font-size: 15px;
+    padding: 3px 1.2%;
+    min-width: 10px;
+    .m-bgc-red;
+    border-radius: 6px;
+    top: 0;
+
+    &:after {
+        border-top-color:#FF5151;
+    }
+    zoom:1.0001;
+}
+
+.irs-min, .irs-max {
+    font-size: 15px;
+    padding: 3px 1.2%;
+    min-width: 10px;
+    background-color: #E6E6E6;
+    display: block !important;
+    border-radius: 6px;
+}
+
+.irs-diapason {
+    top:35px;
+    background-color: #F9999B;
+    height: 16px;
+    cursor: pointer;
+}
+
+
+
+.c-range-outer-simple {
+
+    .irs {
+        height: 16px;
+        padding-top: 0;
+    }
+
+    .irs-diapason, .irs-line {
+        top:0px;
+    }
+
+    .irs-slider {
+        top: -4px;
+    }
+
+    .irs-from, .irs-to, .irs-single,
+    .irs-min, .irs-max {
+        display: none !important;
+    }
+
+}
+
+
+
+.c-range-output {
+    width: 140px;
+}
+
+
+// =============================================
+// Cols
+// =============================================
+
+
+.c-colgroup {
+    .colgroup;
+}
+.c-col {
+    .col;
+    width: 50%;
+}
+.c-col-1 {
+    padding-right: 1%;
+}
+.c-col-2 {
+    padding-left: 1%;
+}
+
+
+
+.c-colgroup {
+    .colgroup;
+}
+.c-col_3 {
+    .col;
+    width: 33.33%;
+}
+.c-col_3-1 {
+    padding-right: 1%;
+}
+.c-col_3-2 {
+    padding-right: 1%;
+    padding-left: 1%;
+}
+.c-col_3-3 {
+    padding-left: 1%;
+}
+
+
+.c-inline {
+    display: inline;
+    margin-right: 1em;
+}
+
+.c-inline-block {
+    display: inline-block;
+    margin-right: 1em;
+}
+
+
+// =============================================
+// Form
+// =============================================
+
+.form-hd {
+    margin-bottom: .7em;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: .5em;
+
+}
+
+.form-label-inline {
+    margin-right: 1em;
+}
+
+.form-row {
+    position: relative;
+    margin-bottom: 1.4em;
+}
+
+.form-tip {
+    color: #ccc;
+    font-size: .85em;
+    padding-top: .4em;
+}
+.form-tip-error {
+    color: #FF4242;
+}
+
+.form-row-last {
+    position: relative;
+    margin-top: 1.6em;
+}
+

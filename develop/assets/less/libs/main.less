@@ -52,13 +52,12 @@ body {
 // =============================================
 
 h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-  padding: 0;
-  font-family: inherit;
-  line-height: normal;
-  color: inherit;
-  font-weight: normal;
-  text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+    line-height: normal;
+    color: inherit;
+    font-weight: normal;
 }
 
 h1 { font-size: 55px; }
@@ -95,7 +94,12 @@ a {
 
 .placeholder {color: @placeholderColor; }
 
-.ico {display: inline-block; position: relative; vertical-align: middle; background-repeat:no-repeat;}
+.media {
+    overflow: hidden;
+    zoom:1;
+}
+
+.icon {display: inline-block; position: relative; vertical-align: middle; background-repeat:no-repeat;}
 
 .colgroup {.unlist; .clearfix(); position: relative; display: block; width: 100%; }
 .col {float: left; display: block; position: relative; }
