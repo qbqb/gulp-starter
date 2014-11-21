@@ -94,7 +94,6 @@ window.helpers = {
                 this.places = o.places;
                 this.markers = [];
                 this.infoWindow = new google.maps.InfoWindow();
-                this.id = o.id;
 
                 if( o.styles ){ //Добавляем стили
                     var styledMap = new google.maps.StyledMapType(o.styles,
