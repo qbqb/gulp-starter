@@ -77,6 +77,8 @@ $(document).ready(function() {
         $(this).toggleClass('active');
     });
 
+    //$('#myModal').modal();
+
     helpers.plugins.googleMaps.init.call(google.maps, {
         id:'map_canvas',
         centerY:59.9369183,

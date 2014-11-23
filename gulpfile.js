@@ -36,7 +36,6 @@ gulp.task('webserver', function() {
     gulp.src('public')
     .pipe(webserver({
         host: 'localhost',
-        //host: '192.168.120.196',
         port: 3000,
         livereload: true
     }));
