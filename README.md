@@ -12,7 +12,7 @@ npm install
 
 ##Запуск
 
-cd gulp-front
+cd gulp-stater
 gulp
 
 Cервер запустится на localhost:3000
