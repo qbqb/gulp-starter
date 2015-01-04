@@ -112,10 +112,18 @@ gulp.task('sprite', function () {
     spriteData.css.pipe(gulp.dest('develop/assets/less/libs/'));
 });
 
+//Копируем шрифты
+gulp.task('fonts', function() {
+    gulp.src('develop/assets/less/libs/fonts/**/*')
+        .pipe(gulp.dest('public/assets/css/fonts'));
+});
+
+
+
 
 //Очищаем паблик
 gulp.task('clean', function(cb) {
-    del(['public/*', 'public/assets/css', 'public/assets/js', 'public/assets/images/**/*'], cb)
+    del(['public/*', 'public/assets/css', 'public/assets/css/fonts', 'public/assets/js', 'public/assets/images/**/*'], cb)
 });
 
 
@@ -138,7 +146,7 @@ gulp.task("watch", function(){
     gulp.watch(['develop/assets/js/**/*', '!develop/assets/js/libs/fancybox/**/*'], ['js']);
 });
 
-gulp.task('build', ['twig-compile', 'less', 'images', 'js', 'sprite']);
+gulp.task('build', ['twig-compile', 'less', 'images', 'js', 'sprite', 'fonts']);
 
 gulp.task('default', ['clean'], function() {
     gulp.start('build', 'watch', 'webserver');
