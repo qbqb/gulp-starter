@@ -62,12 +62,7 @@ gulp.task('twig-compile', function () {
     return gulp.src(['develop/pages/**/*.twig', '!./develop/pages/layouts/*.twig'])
         .pipe(twig({
             data: {
-                title: 'Gulp and Twig',
-                benefits: [
-                    'Fast',
-                    'Flexible',
-                    'Secure'
-                ]
+                title: 'Gulp and Twig'
             }
         }))
         //.on('error', handleError)
