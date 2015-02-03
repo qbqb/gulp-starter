@@ -1,0 +1,297 @@
+{% extends "layouts/layout.twig" %}
+{% block content %}
+
+  <div style="width:600px; margin:auto; padding-top: 20px; padding-bottom: 300px;">
+
+
+    {# ######### Текстовые поля ######### #}
+
+    <h3 class="form-hd">
+      Текстовые поля
+    </h3>
+
+    <div class="form-line">
+      <label for="" class="form-label">
+        Имя
+      </label>
+      <div class="form-input fill">
+        <input type="text" name="" placeholder="Введите текст">
+        <span class="form-tip form-error">
+          Введите текст сообщения
+        </span>
+      </div>
+    </div>
+
+    <div class="form-line">
+      <label for="" class="form-label">
+        Фамилия
+      </label>
+      <div class="form-input fill error">
+        <input type="text" name="" placeholder="Введите текст">
+        <span class="form-tip form-error">
+          Введите текст сообщения
+        </span>
+      </div>
+    </div>
+
+    <div class="form-line">
+      <label for="" class="form-label">
+        Отчество
+      </label>
+      <div class="form-input fill error">
+        <input type="text" name="" placeholder="Введите текст">
+        <span class="form-tip">
+          Подсказка
+        </span>
+      </div>
+    </div>
+
+    <div class="form-line">
+      <label for="" class="form-label">
+        О себе
+      </label>
+      <div class="form-input fill">
+        <textarea class=""></textarea>
+      </div>
+    </div>
+
+    <div>
+      <div class="form-search">
+        <i>Search</i>
+      </div>
+    </div>
+
+    <br><br>
+
+
+    {# ######### Кнопки ######### #}
+
+    <h3 class="form-hd">
+      Кнопки
+    </h3>
+
+    <div class="form-line">
+      <input type="submit" class="form-btn" value="Отправить">
+      <a href="#" class="form-btn">Отправить</a>
+      <button type="submit" class="form-btn">
+        Отправить
+      </button>
+    </div>
+
+    <div class="form-line">
+      <button type="submit" class="form-btn middle">
+        Сохранить и продолжить ввод данных
+      </button>
+    </div>
+
+    <div class="form-line">
+      <button type="submit" class="form-btn large">
+        Сохранить и продолжить ввод данных
+      </button>
+    </div>
+
+    <div class="form-line">
+      <button type="submit" class="form-btn fill">
+        Сохранить и продолжить ввод данных
+      </button>
+    </div>
+
+    <br><br>
+
+
+    {# ######### Элементы выбора ######### #}
+
+    <h3 class="form-hd">
+      Элементы выбора
+    </h3>
+
+    <div class="form-line">
+      <label class="form-control-label">
+        <div class="label-pic">
+          <input type="checkbox" />
+          <span class="label-ico">
+            <span class="ico ico-checkbox"></span>
+          </span>
+        </div>
+        <div class="label-desc">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt quasi ipsa ea, et alias architecto,  iste, ipsum velit esse soluta rem. Recusandae beatae quaerat, praesentium dolorum incidunt suscipit  tenetur eius.
+        </div>
+      </label>
+    </div>
+
+    <div class="form-line">
+      <div class="inline">
+        <label class="form-control-label label-radio">
+          <div class="label-pic">
+            <input type="radio" name="sex" />
+            <span class="label-ico">
+              <span class="ico ico-radio"></span>
+            </span>
+          </div>
+          <div class="label-desc">
+            Мужской
+          </div>
+        </label>
+      </div>
+      <div class="inline">
+        <label class="form-control-label label-radio">
+          <div class="label-pic">
+            <input type="radio" name="sex" />
+            <span class="label-ico">
+            <span class="ico ico-radio"></span>
+            </span>
+          </div>
+          <div class="label-desc">
+            Женский
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <br><br>
+
+
+    {# ######### Выпадающие списки ######### #}
+
+    <h3 class="form-hd">
+      Выпадающие списки
+    </h3>
+
+    <div class="form-line">
+      <div class="dropdown dropdown-on ">
+        <div class="dropdown-button">
+          <span class="dropdown-button-title">Периодичность</span>
+          <i class="ico ico-arr-down dropdown-arr"></i>
+        </div>
+        <ul class="dropdown-menu">
+          <li class="dropdown-menu-item" data-value="1">
+            <span class="dropdown-menu-title">Утро</span>
+          </li>
+          <li class="dropdown-menu-item" data-value="2">
+            <span class="dropdown-menu-title">День</span>
+          </li>
+          <li class="dropdown-menu-item" data-value="3">
+            <span class="dropdown-menu-title">Вечер</span>
+          </li>
+          <li class="dropdown-menu-item" data-value="4">
+            <span class="dropdown-menu-title">Ночь</span>
+          </li>
+        </ul>
+        <input class="dropdown-hidden" type="hidden" value="0">
+      </div>
+    </div>
+    <div class="form-line">
+      <div class="dropdown dropdown-on dropdown-fill">
+        <div class="dropdown-button">
+          <span class="dropdown-button-title">ПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичностьПериодичность</span>
+          <i class="ico ico-arr-down dropdown-arr"></i>
+        </div>
+        <ul class="dropdown-menu">
+          <li class="dropdown-menu-item" data-value="1">
+            <span class="dropdown-menu-title">Утро</span>
+          </li>
+          <li class="dropdown-menu-item" data-value="2">
+            <span class="dropdown-menu-title">День</span>
+          </li>
+          <li class="dropdown-menu-item" data-value="3">
+            <span class="dropdown-menu-title">Вечер</span>
+          </li>
+          <li class="dropdown-menu-item" data-value="4">
+            <span class="dropdown-menu-title">Ночь</span>
+          </li>
+          <li class="dropdown-menu-item" data-value="1">
+            <span class="dropdown-menu-title">Утро</span>
+          </li>
+          <li class="dropdown-menu-item" data-value="2">
+            <span class="dropdown-menu-title">День</span>
+          </li>
+          <li class="dropdown-menu-item" data-value="3">
+            <span class="dropdown-menu-title">Вечер</span>
+          </li>
+          <li class="dropdown-menu-item" data-value="4">
+            <span class="dropdown-menu-title">Ночь</span>
+          </li>
+        </ul>
+        <input class="dropdown-hidden" type="hidden" value="0">
+      </div>
+    </div>
+    <div class="form-line">
+      <div class="dropdown dropdown-on dropdown-multi">
+        <div class="dropdown-button">
+          <span class="dropdown-button-title">Периодичность </span>
+          <i class="ico ico-arr-down dropdown-arr"></i>
+        </div>
+        <ul class="dropdown-menu">
+          <li class="dropdown-menu-item" data-value="morning">
+            <label class="c-label">
+              <div class="c-label-pic">
+                <input type="checkbox" />
+                <span class="c-label-ico">
+                <span class="ico ico-checkbox"></span>
+                </span>
+              </div>
+              <div class="c-label-desc">
+                Утро
+              </div>
+            </label>
+          </li>
+          <li class="dropdown-menu-item" data-value="daytime">
+            <label class="c-label">
+              <div class="c-label-pic">
+                <input type="checkbox" />
+                <span class="c-label-ico">
+                <span class="ico ico-checkbox"></span>
+                </span>
+              </div>
+              <div class="c-label-desc">
+                День
+              </div>
+            </label>
+          </li>
+          <li class="dropdown-menu-item" data-value="evening">
+            <label class="c-label">
+              <div class="c-label-pic">
+                <input type="checkbox" />
+                <span class="c-label-ico">
+                <span class="ico ico-checkbox"></span>
+                </span>
+              </div>
+              <div class="c-label-desc">
+                Вечер
+              </div>
+            </label>
+          </li>
+          <li class="dropdown-menu-item" data-value="night">
+            <label class="c-label">
+              <div class="c-label-pic">
+                <input type="checkbox" />
+                <span class="c-label-ico">
+                <span class="ico ico-checkbox"></span>
+                </span>
+              </div>
+              <div class="c-label-desc">
+                Ночь
+              </div>
+            </label>
+          </li>
+        </ul>
+        <input class="dropdown-hidden" type="hidden" value="">
+      </div>
+    </div>
+
+    <br><br>
+
+    {# ######### Загрузка файла ######### #}
+
+    <h3 class="form-hd">
+      Загрузка файла
+    </h3>
+
+
+
+
+  </div>
+
+
+
+{% endblock %}

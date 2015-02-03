@@ -1,0 +1,184 @@
+{% extends "layouts/layout.twig" %}
+{% block content %}
+
+  <div style="width:600px; margin:auto; padding-top: 20px; padding-bottom: 300px;">
+
+    {# ######### Slider ######### #}
+
+    <h3 class="form-hd">
+      Slider
+    </h3>
+
+    <div class="slider">
+      <ul class="slider-on" role="test">
+        <li class="slide slide-1"></li>
+        <li class="slide slide-2"></li>
+        <li class="slide slide-3"></li>
+        <li class="slide slide-4"></li>
+      </ul>
+    </div>
+
+    <br><br>
+
+{#
+
+    //_______________Customization
+
+    <style>
+
+      .main-slider .slide {
+        height: 500px;
+      }
+
+      .main-slider .bx-wrapper {
+        margin-bottom: 50px;
+      }
+
+    </style>
+
+
+    <div class="main-slider slider">
+      <ul class="main-slider-on">
+        <li class="slide slide-1"></li>
+        <li class="slide slide-2"></li>
+        <li class="slide slide-3"></li>
+        <li class="slide slide-4"></li>
+      </ul>
+    </div>
+
+
+    <script>
+
+      $('.main-slider-on').bxSlider();
+
+    </script>
+
+#}
+
+
+
+  {# ######### Slider Gallery ######### #}
+
+  <h3 class="form-hd">
+    Slider Gallery
+  </h3>
+
+  <br><br>
+
+
+
+
+
+  {# ######### Fancybox ######### #}
+
+  <h3 class="form-hd">
+    Fancybox
+  </h3>
+
+  <a href="#popup" class="fancybox form-btn">
+    Fancy Button
+  </a>
+
+  <div id="#popup" style="display: none; width: 400px; padding:20px">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id reprehenderit quae eius libero cupiditate. Placeat beatae, veniam minus facilis excepturi, impedit eligendi nostrum error at qui fugit est, iusto cum!
+  </div>
+
+  <br><br><br><br>
+
+
+
+
+  {# ######### Fancybox Gallery ######### #}
+
+   <h3 class="form-hd">
+    Fancybox Gallery
+  </h3>
+
+  <br><br>
+
+
+  {# ######### Tabs ######### #}
+
+  <h3 class="form-hd">
+    Tabs
+  </h3>
+
+  <div class="tabs tabs-on" role="test">
+    <ul class="tabs-control">
+      <li><a href="#tab-1" class="form-btn">Tab 1</a></li>
+      <li><a href="#tab-2" class="form-btn">Tab 2</a></li>
+      <li><a href="#tab-3" class="form-btn">Tab 3</a></li>
+    </ul>
+    <div id="tab-1" class="tabs-content tabs-content-1">
+      1
+    </div>
+    <div id="tab-2" class="tabs-content tabs-content-2">
+      2
+    </div>
+    <div id="tab-3" class="tabs-content tabs-content-3">
+      3
+    </div>
+  </div>
+
+  <br><br>
+
+
+  {# ######### Toggle Content ######### #}
+
+  <h3 class="form-hd">
+    Toggle Content
+  </h3>
+
+  <div class="toggle-box" role="test">
+    <div>
+      <a href="#" class="toggle-button form-btn" data-toggle-title-open="Open" data-toggle-title-close="Close">
+        <span class="toggle-button-title">Open</span>
+      </a>
+    </div>
+    <div class="toggle-content">
+      <div>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus dolore velit totam iste cum numquam eum illum quis rem recusandae doloribus officia aliquam quia nam, voluptate commodi. Exercitationem, dolorem, reiciendis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus dolore velit totam iste cum numquam eum illum quis rem recusandae doloribus officia aliquam quia nam, voluptate commodi. Exercitationem, dolorem, reiciendis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus dolore velit totam iste cum numquam eum illum quis rem recusandae doloribus officia aliquam quia nam, voluptate commodi. Exercitationem, dolorem, reiciendis.
+      </div>
+    </div>
+  </div>
+
+
+{#
+    //_______________Customization
+
+  <a href="#" class="toggle-button-open"><span class="toggle-button-title">Развернуть</span></a>
+  <a href="#" class="toggle-button-close"><span class="toggle-button-title">Свернуть</span></a>
+
+#}
+
+  <br><br>
+
+
+
+  {# ######### Map ######### #}
+
+  <h3 class="form-hd">
+    Map
+  </h3>
+
+  <div id="map1" class="map map-on" role="test" data-x="55.7592698" data-y="37.6104811" data-zoom="17" data-marker-coords="[[55.7592698,37.6104811]]">
+  </div>
+
+  <br><br>
+
+
+
+
+  {# ######### Range Slider ######### #}
+
+  <h3 class="form-hd">
+    Range Slider
+  </h3>
+
+
+  </div>
+
+
+
+
+{% endblock %}

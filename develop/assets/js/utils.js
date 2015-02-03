@@ -1,12 +1,6 @@
 ;(function( $, window, undefined ) {
 
-    /*!
-    * jQuery stickTheFooter plugin
-    *
-    * Copyright (c) 2014
-    *
-    * @version 1.0.0
-    */
+
     jQuery.fn.stickTheFooter = function ( options ) {
         var o = $.extend({
             header   :  $('#header'),
@@ -24,17 +18,9 @@
             $(window).resize(init);
         });
     }
-    /* . */
 
 
 
-    /*!
-    * jQuery dropdown plugin
-    *
-    * Copyright (c) 2014
-    *
-    * @version 1.0.0
-    */
     jQuery.fn.dropdown = function ( options ) {
 
         var defaults = {
@@ -55,8 +41,6 @@
 
 
         $(document.body).on('click', $el.selector+" "+o.button, function(e){
-
-
 
             var $dropdown = $(this).closest($el.selector);
             var $menu  = $dropdown.find(o.menu);
@@ -79,8 +63,9 @@
 
             e.preventDefault();
 
-
         });
+
+
 
         $(document.body).on('click', $el.selector+" "+o.item, function(e){
             var $dropdown = $(this).closest($el.selector);
@@ -275,19 +260,11 @@
 
 
     }
-    /* . */
 
 
 
 
 
-    /*!
-    * jQuery fancyConfirm plugin
-    *
-    * Copyright (c) 2014
-    *
-    * @version 1.0.0
-    */
     $.fn.fancyConfirm = function ( options ) {
 
         var defaults = {
@@ -341,13 +318,7 @@
     }
 
 
-    /*!
-    * jQuery toggleBox plugin
-    *
-    * Copyright (c) 2014
-    *
-    * @version 1.0.0
-    */
+
     $.fn.toggleBox = function( options ){
 
         var defaults = {
@@ -435,6 +406,37 @@
 
 
 
-})(jQuery, window); /*______________End_______________*/
+    window.initMap = function(el) {
+
+      var $el = $(el),
+          id = el.id,
+          x = $el.data('x'),
+          y = $el.data('y'),
+          zoom = $el.data('zoom'),
+          markerCoords = $el.data('marker-coords');
+
+      var map = new google.maps.Map(document.getElementById(id),{
+        center: new google.maps.LatLng(x,y),
+        zoom:zoom,
+        scrollwheel: false,
+        draggable: true
+      });
+
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(markerCoords[0][0],markerCoords[0][1]),
+        map: map
+      });
+
+    }
+
+
+
+
+
+
+
+
+
+})(jQuery, window);
 
 
