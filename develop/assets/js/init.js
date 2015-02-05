@@ -6,7 +6,9 @@ $(document).ready(function() {
         color : '#8f8f8f'
     });
 
-    $(".c-input-phone").inputmask({ mask: "+7[-999][-999999]",
+    $(".input-phone").inputmask({
+        mask: "+7[-999][-999999]",
+        //mask: "+7 (999) 999-99-99",
         greedy: false,
         showMaskOnHover: false,
         'clearIncomplete': false,
@@ -166,7 +168,7 @@ $(document).ready(function() {
       $(this).removeClass('hover');
     });
 
-    $('input:text').focus(function() {
+    $('.input-control').focus(function() {
         $(this).parent().removeClass('error');
     });
 

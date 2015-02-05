@@ -1,7 +1,7 @@
 {% extends "layouts/layout.twig" %}
 {% block content %}
 
-  <div style="width:600px; margin:auto; padding-top: 20px; padding-bottom: 300px;">
+  <div style="width:600px; margin:auto; padding-top: 20px; padding-bottom: 50px;">
 
 
     {# ######### Текстовые поля ######### #}
@@ -15,7 +15,7 @@
         Имя
       </label>
       <div class="form-input fill">
-        <input id="" type="text" name="" placeholder="Введите текст">
+        <input id="" type="text" name="" class="input-control" placeholder="Введите текст">
         <span class="form-tip form-error">
           Введите текст сообщения
         </span>
@@ -27,7 +27,7 @@
         Фамилия
       </label>
       <div class="form-input fill error">
-        <input type="text" name="" placeholder="Введите текст">
+        <input type="text" name="" class="input-control" placeholder="Введите текст">
         <span class="form-tip form-error">
           Введите текст сообщения
         </span>
@@ -39,9 +39,74 @@
         Отчество
       </label>
       <div class="form-input fill error">
-        <input type="text" name="" placeholder="Введите текст">
+        <input type="text" name="" class="input-control" placeholder="Введите текст">
+        <span class="form-tip form-error">
+          Введите текст сообщения
+        </span>
         <span class="form-tip">
           Подсказка
+        </span>
+      </div>
+    </div>
+
+
+    <div class="form-line">
+      <label for="" class="form-label">
+        Почта
+      </label>
+      <div class="form-input ">
+        <input id="" type="email" name="" class="input-control" placeholder="name@mail.ru">
+        <span class="form-tip form-error">
+          Введите текст сообщения
+        </span>
+      </div>
+    </div>
+
+
+    <div class="form-line">
+      <label for="" class="form-label">
+        Телефон
+      </label>
+      <div class="form-input">
+        <input id="" type="text" class="input-phone input-control" name="" placeholder="Введите текст">
+        <span class="form-tip form-error">
+          Введите текст сообщения
+        </span>
+      </div>
+    </div>
+
+    <div class="form-line">
+      <label for="" class="form-label">
+        Пароль
+      </label>
+      <div class="form-input">
+        <input id="" type="password" name="" class="input-control" placeholder="Введите пароль">
+        <span class="form-tip form-error">
+          Введите текст сообщения
+        </span>
+      </div>
+    </div>
+
+    <div class="form-line">
+      <label for="" class="form-label">
+        Поиск
+      </label>
+      <div class="form-search form-input">
+        <input type="search" name="" class="input-control" placeholder="Найти">
+        <button>
+          <i class="icon icon-search"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="form-line">
+      <label for="" class="form-label">
+        Дата
+      </label>
+      <div class="form-input">
+        <input id="" type="text" class="input-control datepicker" name="" placeholder="Введите текст">
+        <span class="form-tip form-error">
+          Введите текст сообщения
         </span>
       </div>
     </div>
@@ -55,19 +120,12 @@
       </div>
     </div>
 
-    <div class="form-line">
-      <div class="form-search form-input">
-        <input type="text" name="" placeholder="Поиск">
-        <button>
-          <i class="icon icon-search"></i>
-        </button>
-      </div>
-    </div>
+
 
     <div class="form-line colpd">
       <div class="col col50">
         <div class="form-input fill">
-          <input type="text" name="" placeholder="Введите текст">
+          <input type="text" name="" class="input-control" placeholder="Введите текст">
           <span class="form-tip form-error">
             Введите текст сообщения
           </span>
@@ -75,7 +133,7 @@
       </div>
       <div class="col col50">
         <div class="form-input fill">
-          <input type="text" name="" placeholder="Введите текст">
+          <input type="text" name="" class="input-control" placeholder="Введите текст">
           <span class="form-tip form-error">
             Введите текст сообщения
           </span>
@@ -86,7 +144,7 @@
     <div class="form-line colpd">
       <div class="col col33">
         <div class="form-input fill">
-          <input type="text" name="" placeholder="Введите текст">
+          <input type="text" name="" class="input-control" placeholder="Введите текст">
           <span class="form-tip form-error">
             Введите текст сообщения
           </span>
@@ -94,7 +152,7 @@
       </div>
       <div class="col col33">
         <div class="form-input fill">
-          <input type="text" name="" placeholder="Введите текст">
+          <input type="text" name="" class="input-control" placeholder="Введите текст">
           <span class="form-tip form-error">
             Введите текст сообщения
           </span>
@@ -102,7 +160,7 @@
       </div>
       <div class="col col33">
         <div class="form-input fill">
-          <input type="text" name="" placeholder="Введите текст">
+          <input type="text" name="" class="input-control" placeholder="Введите текст">
           <span class="form-tip form-error">
             Введите текст сообщения
           </span>
@@ -113,7 +171,7 @@
     <div class="form-line colpd">
       <div class="col col25">
         <div class="form-input fill">
-          <input type="text" name="" placeholder="Введите текст">
+          <input type="text" name="" class="input-control" placeholder="Введите текст">
           <span class="form-tip form-error">
             Введите текст сообщения
           </span>
@@ -121,7 +179,7 @@
       </div>
       <div class="col col25">
         <div class="form-input fill">
-          <input type="text" name="" placeholder="Введите текст">
+          <input type="text" name="" class="input-control" placeholder="Введите текст">
           <span class="form-tip form-error">
             Введите текст сообщения
           </span>
@@ -129,7 +187,7 @@
       </div>
       <div class="col col25">
         <div class="form-input fill">
-          <input type="text" name="" placeholder="Введите текст">
+          <input type="text" name="" class="input-control" placeholder="Введите текст">
           <span class="form-tip form-error">
             Введите текст сообщения
           </span>
@@ -137,7 +195,7 @@
       </div>
       <div class="col col25">
         <div class="form-input fill">
-          <input type="text" name="" placeholder="Введите текст">
+          <input type="text" name="" class="input-control" placeholder="Введите текст">
           <span class="form-tip form-error">
             Введите текст сообщения
           </span>

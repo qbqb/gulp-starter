@@ -9,6 +9,12 @@ input, button, select, textarea {
   .placeholder(@placeholderColor)
 }
 
+input[type="search"] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 
 
 // =============================================
@@ -25,8 +31,13 @@ input, button, select, textarea {
   display: inline-block;
 }
 
-.form-input input[type="text"],
-input[type="text"].form-input,
+.input-control {
+  outline: none ;
+  box-shadow: none;
+}
+
+.form-input .input-control,
+.input-control.form-input,
 .form-input textarea,
 textarea.form-input ,
 {
@@ -54,7 +65,7 @@ textarea.form-input ,
 
 .form-input.fill {
   width: 100%;
-  input[type="text"], textarea {
+  .input-control, textarea {
     width: 100%;
   }
 }
@@ -75,7 +86,7 @@ textarea.form-input ,
   display: block;
 }
 
-.error input[type="text"] {
+.error .input-control {
   border: 1px solid #FF4242;
   .placeholder(#FF4242);
 }
@@ -90,7 +101,7 @@ textarea.form-input {
 
 .form-search {
 
-  input[type="text"]{
+  .input-control{
     padding-right: 40px;
   }
 
@@ -295,6 +306,7 @@ textarea.form-input {
   }
 }
 
+
 .ie7, .ie8 {
   .checkbox-control {
     display: none;
@@ -315,112 +327,6 @@ textarea.form-input {
   }
 
 }
-
-
-
-
-
-
-
-
-// .form-control-label {
-
-//     cursor: pointer;
-//     -moz-user-select: none;
-//     -webkit-user-select: none;
-
-//     display: inline-block;
-//     margin-left: -1px;
-
-//     input[type="checkbox"],
-//     input[type="radio"]
-//     {
-//         display: none;
-//     }
-
-//     .label-pic {
-//         float: left;
-//         overflow: hidden;
-//         zoom:1;
-//         margin-right: .5em;
-//     }
-
-//     .label-desc {
-//         overflow: hidden;
-//         zoom:1;
-//     }
-
-
-
-//     .label-ico {
-//         display: inline-block;
-//         width:  19px;
-//         height: 19px;
-//         margin-right: .2em;
-//         border: 2px solid #e4e4e4;
-//         vertical-align: middle;
-//         border-radius: 2px;
-//         top: 0px;
-//         left: 1px;
-
-//         position: relative;
-//         text-align: center;
-//         .ico {
-//             position:relative;
-//             top: -3px;
-//             display: none;
-//         }
-
-//     }
-
-
-//     input[type="checkbox"]:checked + .label-ico,
-//     input[type="radio"]:checked + .label-ico
-//     {
-//         .ico {
-//            display: inline-block ;
-//         }
-//     }
-
-//     &.label-radio {
-//         .label-ico {
-//             width: 20px;
-//             height: 20px;
-//             border-radius: 100%;
-
-//             .ico {
-//                 top: -4px;
-//                 left: 0px;
-//             }
-
-//         }
-//     }
-
-
-
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
