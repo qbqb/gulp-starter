@@ -90,7 +90,7 @@
 
   {# ######### Fancybox Gallery ######### #}
 
-   <h3 class="form-hd">
+  <h3 class="form-hd">
     Fancybox Gallery
   </h3>
 
@@ -161,12 +161,22 @@
     Map
   </h3>
 
-  <div id="map1" class="map map-on" role="test" data-x="55.7592698" data-y="37.6104811" data-zoom="17" data-places="[[55.7592698,37.6104811]]"></div>
+  <div id="map1" class="map" role="test" data-x="55.7592698" data-y="37.6104811" data-zoom="17" data-places="[
+  [55.7592698,37.6104811],
+  [55.7592698,37.6109911]
+  ]"></div>
+
 
 
 {#
 
     //_______________Customization
+
+
+    //---------------------------------------------
+    // Дополнительные методы
+    //---------------------------------------------
+
 
     <style>
 
@@ -177,9 +187,33 @@
 
     </style>
 
+    <div id="map2" class="main-map map-on" data-x="" data-y="" data-zoom="17" data-places=""></div>
 
-    <div id="map1" class="main-map map map-on" data-x="55.7592698" data-y="37.6104811" data-zoom="17" data-marker-coords="[[55.7592698,37.6104811]]">
-    </div>
+    <script>
+
+      $('.map-on').each(function(){
+        $("#"+this.id).googleMap().init();
+      });
+
+      (function(){
+
+        var gMap = new $.fn.googleMap;
+        var map2 = $('#map2').data('map');
+
+        if (map2) {
+          gMap.addMarkers(map2,[[55.7592698,37.6104811]]);
+
+          map2.panTo(new google.maps.LatLng(
+              55.7592698,
+              37.6104811
+              ));
+        }
+
+      })();
+
+    </script>
+
+
 
 
 #}

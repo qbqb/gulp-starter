@@ -1,7 +1,7 @@
 ;(function( $, window, undefined ) {
 
 
-    jQuery.fn.stickTheFooter = function ( options ) {
+    $.fn.stickTheFooter = function ( options ) {
         var o = $.extend({
             header   :  $('#header'),
             content  :  $('#content'),
@@ -21,7 +21,7 @@
 
 
 
-    jQuery.fn.dropdown = function ( options ) {
+    $.fn.dropdown = function ( options ) {
 
         var defaults = {
             button: '.dropdown-button',
@@ -404,125 +404,57 @@
     }
 
 
+
+
     $.fn.googleMap = function (options) {
 
-        var _this = this;
+        var el = this,
+            x = $(el).data('x'),
+            y = $(el).data('y'),
+            places = $(el).data('places');
 
-        var settings = $.extend({}, {
-            zoom: 5,
-            centerLat: 0,
-            centerLon: 0
-        }, options);
+        //var o = $.extend({}, options);
 
-        this.initialize = function () {
-            var mapOptions = {
-                zoom: settings.zoom
-            };
+        this.init = function () {
 
-            var map = new google.maps.Map(_this.get(0), mapOptions);
-            // do anything with your map object here,
-            // eg: centering map, adding markers
+            var map = new google.maps.Map(el.get(0), {
+              zoom: $(el).data('zoom'),
+              center: new google.maps.LatLng(x, y)
+            });
 
-            /********************************************
-             * This is the trick!
-             * set map object to element's data attribute
-             ********************************************/
-            _this.data('map', map);
+            this.addMarkers(map, places)
 
-            return _this;
+            el.data('map', map);
+
+            return el;
         };
-        // ... more methods
+
+        this.addMarkers = function(_map, _places){
+
+          var latlngbounds = new google.maps.LatLngBounds();
+          for (var i = 0; i < _places.length; i++) {
+              var myLatLng = new google.maps.LatLng(_places[i][0], _places[i][1]);
+              latlngbounds.extend(myLatLng);
+              var marker = new google.maps.Marker({
+                  position: myLatLng,
+                  map: _map
+              });
+          }
+        };
 
         return this;
+
     };
 
 
-/*
-
-
-
-After you define a map element, eg:
-
-var mapCanvas = $('#map-canvas');
-var map = mapCanvas.googleMap({
-    zoom: 5,
-    centerLat: 0,
-    centerLong: 0
-});
-// ... add some pre-load initiation here, eg: add some markers
-// then initialize map
-map.initialize();
-you can then get the map object later on by using element's ID, eg:
-
-var mapCanvas = $('#map-canvas');
-$('.location').on('click', function () {
-    // google map takes time to load, so it's better to get
-    // the data after map is rendered completely
-    var map = mapCanvas.data("map");
-    if (map) {
-        map.panTo(new google.maps.LatLng(
-            $(this).data('latitude'),
-            $(this).data('longitude')
-            ));
-    }
-});
-By using this method, you can have multiple maps with different behaviors on a page.
-
-
-*/
-
-
-    window.initMap = function(el) {
-
-      var $el = $(el),
-          id = el.id,
-          x = $el.data('x'),
-          y = $el.data('y'),
-          zoom = $el.data('zoom'),
-          places = $el.data('places');
-
-      var map = new google.maps.Map(document.getElementById(id),{
-        center: new google.maps.LatLng(x,y),
-        zoom:zoom,
-        scrollwheel: false,
-        draggable: true
-      });
-
-      var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(places[0][0],places[0][1]),
-        map: map
-      });
-
-
-      // this.addMarkers = function(id){
-
-      //   var map = document.getElementById(id);
-      //   var places = $(map).data('places');
-      //   var latlngbounds = new google.maps.LatLngBounds();
-
-
-      //   for (var i = 0; i < places.length; i++) {
-      //       var myLatLng = new google.maps.LatLng(places[i][0], places[i][1]);
-      //       latlngbounds.extend(myLatLng);
-      //       var marker = new google.maps.Marker({
-      //           position: myLatLng,
-      //           map: map
-      //       });
-      //   }
-
-      // };
-
-
-
-      // this.addMarkers(id);
-
-    }
 
 
 
 
 
-    jQuery.fn.filebox = function ( options ) {
+
+
+    $.fn.filebox = function ( options ) {
 
         var o = $.extend({}, options);
 

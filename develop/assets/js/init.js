@@ -156,8 +156,6 @@ $(document).ready(function() {
 
     $('.filebox').filebox();
 
-
-
     $('.js-toggle').click(function(){
         $(this).toggleClass('active');
     });
@@ -172,7 +170,7 @@ $(document).ready(function() {
         $(this).parent().removeClass('error');
     });
 
-    $('.map-on').each(function(){ initMap(this); });
+    $('#map1').googleMap().init();
 
 
 
