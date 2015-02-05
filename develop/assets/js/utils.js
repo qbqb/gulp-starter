@@ -433,6 +433,108 @@
 
 
 
+    jQuery.fn.filebox = function ( options ) {
+
+        var o = $.extend({}, options);
+
+        return this.each(function(e){
+
+          var $el = $(this),
+              $btn = $el.find('.filebox-btn'),
+              $output = $el.find('.filebox-output'),
+              $pic = $el.find('.filebox-pic'),
+              $title = $el.find('.filebox-title'),
+              $closeBtn = $el.find('.filebox-close'),
+              $inputFile = $el.find('input:file');
+
+              if (bowser.msie && bowser.version <= 9) {
+                $inputFile.show();
+                $btn.hide();
+              }
+
+              $btn.on('click',function(e){
+                e.preventDefault();
+                $inputFile.trigger('click');
+              });
+
+              $inputFile.on('change', function(e) {
+                readURL(this);
+                e.preventDefault();
+              });
+
+              $closeBtn.on('click', function(e) {
+                e.preventDefault();
+                $pic.css('backgroundImage',"none");
+                $title.html(' ')
+                $btn.css('display','inline-block');
+                $output.hide();
+                $inputFile.val('');
+              });
+
+
+              (function(el){
+
+                el.addEventListener('dragenter',function(e){
+                    e.preventDefault();
+                },false)
+
+                el.addEventListener('dragover',function(e){
+                    $el.addClass('dragover');
+                    e.preventDefault();
+                },false);
+
+                el.addEventListener('dragleave',function(e){
+                    $el.removeClass('dragover');
+                    e.preventDefault();
+                },false);
+
+                el.addEventListener('drop', function(e){
+
+                    var dt = e.dataTransfer.files;
+                    var name = dt[0].name;
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                      $pic.css('backgroundImage',"url("+e.target.result+")");
+                      $title.html(name);
+                      $btn.hide();
+                      $output.css('display','inline-block');
+                    };
+
+                    reader.readAsDataURL(dt[0]);
+                    $el.removeClass('dragover');
+                    e.preventDefault();
+
+                },false)
+
+              })(this);
+
+
+              function readURL(input){
+                if (input.files && input.files[0]) {
+                  var reader = new FileReader();
+                  var name = input.files[0].name;
+                  reader.onload = function (e) {
+                    $pic.css('backgroundImage',"url("+e.target.result+")");
+                    $title.html(name);
+                    $btn.hide();
+                    $output.css('display','inline-block');
+                  };
+                  reader.readAsDataURL(input.files[0]);
+                }
+              }
+
+
+
+        });
+
+
+
+
+    }
+
+
+
 
 
 

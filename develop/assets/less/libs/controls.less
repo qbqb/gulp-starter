@@ -15,7 +15,7 @@ input, button, select, textarea {
 // Input Text
 // =============================================
 
-.c-input-placeholder-transition {
+.input-placeholder-transition {
      transition:        color 100ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -33,16 +33,16 @@ textarea.form-input ,
   outline:none;
   font-size: @font-size;
   line-height: 1.2;
-  padding: 0 10px 0 10px;
+  padding: 2px 10px 0 10px;
   height: 40px;
   width: 300px;
   border:1px solid rgba(0,0,0,.2);
   transition: all 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
-  &:-moz-placeholder            { .c-input-placeholder-transition; }
-  &::-moz-placeholder           { .c-input-placeholder-transition; }
-  &:-ms-input-placeholder       { .c-input-placeholder-transition; }
-  &::-webkit-input-placeholder  { .c-input-placeholder-transition; }
+  &:-moz-placeholder            { .input-placeholder-transition; }
+  &::-moz-placeholder           { .input-placeholder-transition; }
+  &:-ms-input-placeholder       { .input-placeholder-transition; }
+  &::-webkit-input-placeholder  { .input-placeholder-transition; }
 
   &:focus {
       .placeholder(#cccaca);
@@ -88,6 +88,29 @@ textarea.form-input {
 }
 
 
+.form-search {
+
+  input[type="text"]{
+    padding-right: 40px;
+  }
+
+  button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    border: none;
+    outline: none;
+
+    width: 40px;
+    height: 30px;
+    top: 50%;
+    right: 0px;
+    margin-top: -15px;
+  }
+
+}
+
 
 
 
@@ -128,11 +151,11 @@ textarea.form-input {
     transition:         background-color .2s ease;
 
     &:hover, &.hover {
-        background-color: #D2D2D2;
+        background-color: #EFEFEF;
         color: #6B6B6B;
     }
     &:active, &.active {
-        background-color: #ACACAC;
+        background-color: #EBEBEB;
         color: #6B6B6B;
     }
 
@@ -156,6 +179,13 @@ textarea.form-input {
       padding-bottom: 20px;
       min-width: 100%;
       max-width: 100%;
+    }
+
+    &.btn-pic {
+      .icon {
+        top: -1px;
+        margin-right: 4px;
+      }
     }
 
 
@@ -183,87 +213,205 @@ textarea.form-input {
 // Checkbox/Radio
 // =============================================
 
+.checkbox {
+  display: inline-block;
+  position: relative;
+  .clearfix();
+  cursor: pointer;
+  -moz-user-select:      none;
+  -webkit-user-select:   none;
 
+  input[type="checkbox"]{
+    display: none;
+  }
 
-
-
-.form-control-label {
-
-    cursor: pointer;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-
+  input[type="checkbox"]:checked + .checkbox-control:before {
     display: inline-block;
-    margin-left: -1px;
+  }
+}
 
-    input[type="checkbox"],
-    input[type="radio"]
-    {
-        display: none;
-    }
+.checkbox-control {
+  width:  17px;
+  height: 17px;
+  margin-right: 3px;
+  top: 3px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  display: inline-block;
+  position: relative;
 
-    .label-pic {
-        float: left;
-        overflow: hidden;
-        zoom:1;
-        margin-right: .5em;
-    }
-
-    .label-desc {
-        overflow: hidden;
-        zoom:1;
-        padding-top: 1px;
-    }
-
-
-
-    .label-ico {
-        display: inline-block;
-        width:  19px;
-        height: 19px;
-        margin-right: .2em;
-        border: 2px solid #e4e4e4;
-        vertical-align: middle;
-        border-radius: 2px;
-        top: 0px;
-        left: 1px;
-
-        position: relative;
-        text-align: center;
-        .ico {
-            position:relative;
-            top: -3px;
-            display: none;
-        }
-
-    }
-
-
-    input[type="checkbox"]:checked + .label-ico,
-    input[type="radio"]:checked + .label-ico
-    {
-        .ico {
-           display: inline-block ;
-        }
-    }
-
-    &.label-radio {
-        .label-ico {
-            width: 20px;
-            height: 20px;
-            border-radius: 100%;
-
-            .ico {
-                top: -4px;
-                left: 0px;
-            }
-
-        }
-    }
-
-
+  &:before {
+    content: "";
+    .icon;
+    .icon-checkmark;
+    margin-top: -4.5px;
+    margin-left: -5.5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: none;
+  }
 
 }
+
+.checkbox-media {
+  .checkbox-control {
+    margin-right: 6px;
+    top: 1px;
+    float: left;
+    display: block;
+    overflow: hidden;
+    zoom:1;
+  }
+  .checkbox-title {
+    display: block;
+    overflow: hidden;
+    zoom:1;
+  }
+}
+
+.checkbox.radio {
+
+  input[type="radio"]{
+    display: none;
+  }
+
+  input[type="radio"]:checked + .checkbox-control:before {
+    display: block;
+  }
+
+  .checkbox-control {
+    border-radius: 100%;
+    &:before {
+      background: none;
+      width:  7px;
+      height: 7px;
+      margin-top:  -3.5px;
+      margin-left: -3.5px;
+      background-color: #5B5B5B;
+      border-radius: 100%;
+      display: none;
+    }
+  }
+}
+
+.ie7, .ie8 {
+  .checkbox-control {
+    display: none;
+  }
+  .checkbox input[type="checkbox"],
+  .checkbox input[type="radio"] {
+    display: inline;
+  }
+
+  .checkbox-media {
+    input[type="checkbox"],
+    input[type="radio"] {
+      float: left;
+      margin-right:5px;
+      top: 4px;
+      position: relative;
+    }
+  }
+
+}
+
+
+
+
+
+
+
+
+// .form-control-label {
+
+//     cursor: pointer;
+//     -moz-user-select: none;
+//     -webkit-user-select: none;
+
+//     display: inline-block;
+//     margin-left: -1px;
+
+//     input[type="checkbox"],
+//     input[type="radio"]
+//     {
+//         display: none;
+//     }
+
+//     .label-pic {
+//         float: left;
+//         overflow: hidden;
+//         zoom:1;
+//         margin-right: .5em;
+//     }
+
+//     .label-desc {
+//         overflow: hidden;
+//         zoom:1;
+//     }
+
+
+
+//     .label-ico {
+//         display: inline-block;
+//         width:  19px;
+//         height: 19px;
+//         margin-right: .2em;
+//         border: 2px solid #e4e4e4;
+//         vertical-align: middle;
+//         border-radius: 2px;
+//         top: 0px;
+//         left: 1px;
+
+//         position: relative;
+//         text-align: center;
+//         .ico {
+//             position:relative;
+//             top: -3px;
+//             display: none;
+//         }
+
+//     }
+
+
+//     input[type="checkbox"]:checked + .label-ico,
+//     input[type="radio"]:checked + .label-ico
+//     {
+//         .ico {
+//            display: inline-block ;
+//         }
+//     }
+
+//     &.label-radio {
+//         .label-ico {
+//             width: 20px;
+//             height: 20px;
+//             border-radius: 100%;
+
+//             .ico {
+//                 top: -4px;
+//                 left: 0px;
+//             }
+
+//         }
+//     }
+
+
+
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -329,7 +477,7 @@ textarea.form-input {
         z-index: 2;
 
         width:  40px;
-        #gradient > .horizontal(rgba(0,0,0,0), rgba(255,255,255,1));
+        #gradient > .horizontal(rgba(255,255,255,0), rgba(255,255,255,1));
 
     }
 }
@@ -749,7 +897,6 @@ textarea.form-input {
 .form-label {
     display: block;
     margin-bottom: .5em;
-
 }
 
 .form-label-inline {
@@ -757,13 +904,64 @@ textarea.form-input {
 }
 
 .form-line {
-    position: relative;
-    margin-bottom: 1.4em;
+  position: relative;
+  margin-bottom: 22px;
+  .clearfix();
 }
-
 
 .form-row-last {
     position: relative;
-    margin-top: 1.6em;
+    margin-top: 24px;
 }
 
+
+// =============================================
+// Filebox
+// =============================================
+
+.filebox {
+  input[type="file"]{display: none; }
+  .filebox-output {display: none;}
+}
+
+.filebox[role="test"]{
+  width: 300px;
+  height: 200px;
+  line-height: 200px;
+  background-color: #D8D8D8;
+  text-align: center;
+  transition: all .2s ease;
+
+  .filebox-pic {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    background-size: cover;
+    background-position: 50%;
+    background-repeat:no-repeat;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+
+  .filebox-title {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    text-overflow:ellipsis;
+    max-width: 190px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .filebox-close {
+    margin-left: 5px;
+  }
+
+  &.dragover {
+    opacity: 0.5;
+
+  }
+
+}
