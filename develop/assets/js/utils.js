@@ -404,6 +404,72 @@
     }
 
 
+    $.fn.googleMap = function (options) {
+
+        var _this = this;
+
+        var settings = $.extend({}, {
+            zoom: 5,
+            centerLat: 0,
+            centerLon: 0
+        }, options);
+
+        this.initialize = function () {
+            var mapOptions = {
+                zoom: settings.zoom
+            };
+
+            var map = new google.maps.Map(_this.get(0), mapOptions);
+            // do anything with your map object here,
+            // eg: centering map, adding markers
+
+            /********************************************
+             * This is the trick!
+             * set map object to element's data attribute
+             ********************************************/
+            _this.data('map', map);
+
+            return _this;
+        };
+        // ... more methods
+
+        return this;
+    };
+
+
+/*
+
+
+
+After you define a map element, eg:
+
+var mapCanvas = $('#map-canvas');
+var map = mapCanvas.googleMap({
+    zoom: 5,
+    centerLat: 0,
+    centerLong: 0
+});
+// ... add some pre-load initiation here, eg: add some markers
+// then initialize map
+map.initialize();
+you can then get the map object later on by using element's ID, eg:
+
+var mapCanvas = $('#map-canvas');
+$('.location').on('click', function () {
+    // google map takes time to load, so it's better to get
+    // the data after map is rendered completely
+    var map = mapCanvas.data("map");
+    if (map) {
+        map.panTo(new google.maps.LatLng(
+            $(this).data('latitude'),
+            $(this).data('longitude')
+            ));
+    }
+});
+By using this method, you can have multiple maps with different behaviors on a page.
+
+
+*/
 
 
     window.initMap = function(el) {
@@ -413,7 +479,7 @@
           x = $el.data('x'),
           y = $el.data('y'),
           zoom = $el.data('zoom'),
-          markerCoords = $el.data('marker-coords');
+          places = $el.data('places');
 
       var map = new google.maps.Map(document.getElementById(id),{
         center: new google.maps.LatLng(x,y),
@@ -423,13 +489,138 @@
       });
 
       var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(markerCoords[0][0],markerCoords[0][1]),
+        position: new google.maps.LatLng(places[0][0],places[0][1]),
         map: map
       });
+
+
+      // this.addMarkers = function(id){
+
+      //   var map = document.getElementById(id);
+      //   var places = $(map).data('places');
+      //   var latlngbounds = new google.maps.LatLngBounds();
+
+
+      //   for (var i = 0; i < places.length; i++) {
+      //       var myLatLng = new google.maps.LatLng(places[i][0], places[i][1]);
+      //       latlngbounds.extend(myLatLng);
+      //       var marker = new google.maps.Marker({
+      //           position: myLatLng,
+      //           map: map
+      //       });
+      //   }
+
+      // };
+
+
+
+      // this.addMarkers(id);
 
     }
 
 
+
+
+
+    jQuery.fn.filebox = function ( options ) {
+
+        var o = $.extend({}, options);
+
+        return this.each(function(e){
+
+          var $el = $(this),
+              $btn = $el.find('.filebox-btn'),
+              $output = $el.find('.filebox-output'),
+              $pic = $el.find('.filebox-pic'),
+              $title = $el.find('.filebox-title'),
+              $closeBtn = $el.find('.filebox-close'),
+              $inputFile = $el.find('input:file');
+
+              if (bowser.msie && bowser.version <= 9) {
+                $inputFile.show();
+                $btn.hide();
+              }
+
+              $btn.on('click',function(e){
+                e.preventDefault();
+                $inputFile.trigger('click');
+              });
+
+              $inputFile.on('change', function(e) {
+                readURL(this);
+                e.preventDefault();
+              });
+
+              $closeBtn.on('click', function(e) {
+                e.preventDefault();
+                $pic.css('backgroundImage',"none");
+                $title.html(' ')
+                $btn.css('display','inline-block');
+                $output.hide();
+                $inputFile.val('');
+              });
+
+
+              (function(el){
+
+                el.addEventListener('dragenter',function(e){
+                    e.preventDefault();
+                },false)
+
+                el.addEventListener('dragover',function(e){
+                    $el.addClass('dragover');
+                    e.preventDefault();
+                },false);
+
+                el.addEventListener('dragleave',function(e){
+                    $el.removeClass('dragover');
+                    e.preventDefault();
+                },false);
+
+                el.addEventListener('drop', function(e){
+
+                    var dt = e.dataTransfer.files;
+                    var name = dt[0].name;
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                      $pic.css('backgroundImage',"url("+e.target.result+")");
+                      $title.html(name);
+                      $btn.hide();
+                      $output.css('display','inline-block');
+                    };
+
+                    reader.readAsDataURL(dt[0]);
+                    $el.removeClass('dragover');
+                    e.preventDefault();
+
+                },false)
+
+              })(this);
+
+
+              function readURL(input){
+                if (input.files && input.files[0]) {
+                  var reader = new FileReader();
+                  var name = input.files[0].name;
+                  reader.onload = function (e) {
+                    $pic.css('backgroundImage',"url("+e.target.result+")");
+                    $title.html(name);
+                    $btn.hide();
+                    $output.css('display','inline-block');
+                  };
+                  reader.readAsDataURL(input.files[0]);
+                }
+              }
+
+
+
+        });
+
+
+
+
+    }
 
 
 

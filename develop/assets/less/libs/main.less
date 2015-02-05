@@ -112,7 +112,7 @@ a {
 .bold {font-weight: bold; }
 .italic {font-stl: italic; }
 .nowrap { white-space: nowrap; }
-.inline {display: inline; padding-right: 1em; }
+.inline {display: inline; margin-right: .5em; }
 .hide {display: none; }
 .show {display: block; }
 .show-inline {display: inline; }
@@ -182,7 +182,10 @@ a {
 }
 
 .col10  {.col;  width: 10%; }
+.col14  {.col;  width: 14.29%; } //1/7
+.col16  {.col;  width: 16.67%; } //1/6
 .col20  {.col;  width: 20%; }
+.col25  {.col;  width: 25%; }
 .col30  {.col;  width: 30%; }
 .col33  {.col;  width: 33.33%; }
 .col40  {.col;  width: 40%; }
@@ -192,6 +195,35 @@ a {
 .col80  {.col;  width: 80%; }
 .col90  {.col;  width: 90%; }
 .col100 {.col;  width: 100%; }
+
+// .colpd {
+//   padding-left:  1%;
+//   padding-right: 1%;
+
+//   &:first-child {
+//     padding-left: 0;
+//   }
+
+//   &:last-child {
+//     padding-right: 0;
+//   }
+
+// }
+
+
+.colpd {
+  .col {
+    padding-left:  1%;
+    padding-right: 1%;
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 0;
+      }
+  }
+}
 
 
 .aside {

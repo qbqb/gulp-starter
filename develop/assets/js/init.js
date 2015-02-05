@@ -6,7 +6,9 @@ $(document).ready(function() {
         color : '#8f8f8f'
     });
 
-    $(".c-input-phone").inputmask({ mask: "+7[-999][-999999]",
+    $(".input-phone").inputmask({
+        mask: "+7[-999][-999999]",
+        //mask: "+7 (999) 999-99-99",
         greedy: false,
         showMaskOnHover: false,
         'clearIncomplete': false,
@@ -40,26 +42,6 @@ $(document).ready(function() {
     });
 */
 
-    $('.c-slider-on').bxSlider({
-      // slideWidth: 1000,
-      // minSlides: 4,
-      // maxSlides: 4,
-      // slideMargin: 10,
-      // moveSlides: 1
-    });
-
-    $('.c-slider-fade-on').bxSlider({
-        mode:'fade',
-        speed:800,
-        easing: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)',
-        pager:true,
-        auto:true,
-        pause:2000,
-        autoHover:true,
-        onSliderLoad:function(currentIndex){},
-        onSlideBefore:function($slideElement, oldIndex, newIndex){},
-        onSlideAfter:function($slideElement, oldIndex, newIndex){}
-    });
 
     $('.slider-on').bxSlider({
 
@@ -84,10 +66,6 @@ $(document).ready(function() {
 
     });
 
-
-    $('.c-tabs-on').tabslet({
-        animation: true
-    });
 
     $('.tabs-on').tabslet({
         animation: true
@@ -157,6 +135,18 @@ $(document).ready(function() {
     // [ bowser.windowsphone ]
     // [ bowser.ios ] [ bowser.iphone ] [ bowser.ipad ] [ bowser.ipod ]
 
+    if ( bowser.mobile ) {
+      $('body:eq(0)').addClass('mobile');
+    }
+
+    if ( bowser.msie && bowser.version == 8 ){
+      $('body:eq(0)').addClass('ie8');
+    }
+
+    if ( bowser.msie && bowser.version == 7 ){
+      $('body:eq(0)').addClass('ie7');
+    }
+
     $('body').stickTheFooter();
 
     var dropdown = window.dropdown = $('.dropdown-on').dropdown();
@@ -164,9 +154,9 @@ $(document).ready(function() {
 
     $('.toggle-box').toggleBox();
 
-    if ( bowser.mobile ) {
-      $('body:eq(0)').addClass('mobile');
-    }
+    $('.filebox').filebox();
+
+
 
     $('.js-toggle').click(function(){
         $(this).toggleClass('active');
@@ -178,7 +168,7 @@ $(document).ready(function() {
       $(this).removeClass('hover');
     });
 
-    $('input:text').focus(function() {
+    $('.input-control').focus(function() {
         $(this).parent().removeClass('error');
     });
 
