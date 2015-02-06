@@ -170,7 +170,12 @@ $(document).ready(function() {
         $(this).parent().removeClass('error');
     });
 
-    $('#map1').googleMap().init();
+    $('#map1').googleMap({
+      mapOptions:{
+        scrollwheel: false,
+        draggable:true
+      }
+    }).init();
 
 
 

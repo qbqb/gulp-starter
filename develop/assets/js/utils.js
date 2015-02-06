@@ -411,36 +411,51 @@
         var el = this,
             x = $(el).data('x'),
             y = $(el).data('y'),
-            places = $(el).data('places');
+            zoom = $(el).data('zoom'),
+            places = $(el).data('places'),
+            o = $.extend({
 
-        //var o = $.extend({}, options);
+              mapOptions: {
+                scrollwheel: false,
+                draggable:true
+              },
+
+              markerOptions: {}
+
+            }, options);
 
         this.init = function () {
 
-            var map = new google.maps.Map(el.get(0), {
-              zoom: $(el).data('zoom'),
-              center: new google.maps.LatLng(x, y)
-            });
+          if( !el[0] ) return;
 
-            this.addMarkers(map, places)
+          var map = new google.maps.Map(el.get(0), $.extend({
+            zoom: zoom,
+            center: new google.maps.LatLng(x, y)
+          }, o.mapOptions));
 
-            el.data('map', map);
+          this.addMarkers(map, places)
 
-            return el;
+          el.data('map', map);
+
+          return el;
+
         };
 
         this.addMarkers = function(_map, _places){
-
           var latlngbounds = new google.maps.LatLngBounds();
           for (var i = 0; i < _places.length; i++) {
               var myLatLng = new google.maps.LatLng(_places[i][0], _places[i][1]);
               latlngbounds.extend(myLatLng);
-              var marker = new google.maps.Marker({
-                  position: myLatLng,
-                  map: _map
-              });
+              var marker = new google.maps.Marker($.extend({
+                position: myLatLng,
+                map: _map
+                //title:_places[i][2]
+              }, o.markerOptions));
           }
         };
+
+        //this.removeMarkers
+        //this.refreshMarkers
 
         return this;
 
