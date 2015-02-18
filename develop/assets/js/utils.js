@@ -1,29 +1,9 @@
 ;(function( $, window, undefined ) {
 
 
-    $.fn.stickTheFooter = function ( options ) {
+    jQuery.fn.dropdown = function ( opts ) {
+
         var o = $.extend({
-            header   :  $('#header'),
-            content  :  $('#content'),
-            footer   :  $('#footer'),
-            offset   :  0
-        }, options);
-        return this.each(function(event){
-            var headerHeight   =  o.header.eq(0).outerHeight(),
-                footerHeight   =  o.footer.eq(0).outerHeight();
-            function init(){
-               o.content.css('minHeight', $(window).outerHeight() - footerHeight - headerHeight + o.offset);
-            }
-            init();
-            $(window).resize(init);
-        });
-    }
-
-
-
-    $.fn.dropdown = function ( options ) {
-
-        var defaults = {
             button: '.dropdown-button',
             menu: '.dropdown-menu',
             buttonTitle: '.dropdown-button-title',
@@ -31,237 +11,63 @@
             itemTitle: '.dropdown-menu-title',
             inputHidden: '.dropdown-hidden',
             active:'active',
-            dataAttr:'value',
-        }
+            dataAttr:'value'
+        }, opts);
 
-        var o = $.extend(defaults, options);
+        o.dropdown = $(this).selector;
 
-        var $el = $(this);
+        var $el = $(this), $dropdown, $button, $menu, $buttonTitle, $item, $itemTitle, $inputHidden, val;
 
-
-
-        $(document.body).on('click', $el.selector+" "+o.button, function(e){
-
-            var $dropdown = $(this).closest($el.selector);
-            var $menu  = $dropdown.find(o.menu);
+        $(document.body).on('click', o.button, function(e){
+            $dropdown = $(this).closest(o.dropdown);
+            $menu     = $dropdown.find(o.menu);
 
             if ( !$dropdown.hasClass(o.active) ) {
-
-                $($el.selector).removeClass(o.active);
-                $($el.selector).find(o.menu).hide();
+                $(o.dropdown).removeClass(o.active);
+                $(o.dropdown).find(o.menu).hide();
                 $dropdown.addClass(o.active);
                 $menu.show();
                 $(window).on('click', hideDropdown);
-
             } else {
-
                 $dropdown.removeClass(o.active);
                 $menu.hide();
                 $(window).off('click', hideDropdown);
-
             }
 
             e.preventDefault();
-
         });
 
+        $(document.body).on('click', o.item, function(e){
+            $dropdown    = $(this).closest(o.dropdown);
+            $buttonTitle = $dropdown.find(o.buttonTitle);
+            $menu        = $dropdown.find(o.menu);
+            $inputHidden = $dropdown.find(o.inputHidden);
 
+            $menu.hide();
+            $buttonTitle.html( $(this).find(o.itemTitle).html() );
+            $inputHidden.val( $(this).data(o.dataAttr) );
+            $dropdown.removeClass(o.active);
 
-        $(document.body).on('click', $el.selector+" "+o.item, function(e){
-            var $dropdown = $(this).closest($el.selector);
-            var $menu  = $dropdown.find(o.menu);
-            var $buttonTitle = $dropdown.find(o.buttonTitle);
-            var $inputHidden = $dropdown.find(o.inputHidden);
-            var $checkbox;
-            var level;
-            var i = 0;
-
-            if( $dropdown.hasClass('dropdown-multi') ) {
-
-                if ( $inputHidden.val() == "" ){
-                    var hiddenArr = [];
-                } else {
-                    var hiddenArr = $inputHidden.val().split(',');
-                }
-
-                $(o.menu).hide();
-                $menu.show();
-                $dropdown.addClass('dropdown-changed');
-
-                $checkbox = $(this).find("input[type='checkbox']");
-                $checkbox.prop("checked") == false ? $checkbox.prop("checked", true) : $checkbox.prop("checked", false);
-
-
-                //Если выбрали главный элемент уровня
-                if( $(this).hasClass('dropdown-menu-item-higher') ) {
-                    level = $(this).data('level');
-                    if( $checkbox.prop("checked") == false ){
-                        setSubLevel(level,false);
-                    } else {
-                        setSubLevel(level,true);
-                    }
-                }
-
-                function setSubLevel(level, boo){
-                    $menu
-                        .find('.dropdown-menu-item-sub')
-                        .filter("[data-level = "+level+"]")
-                        .each(function(){
-                            $(this).find("input[type='checkbox']").prop("checked", boo);
-                        });
-                }
-
-
-                //Если выбрали подуровень
-                if( $(this).hasClass('dropdown-menu-item-sub') ) {
-                    level = $(this).data('level');
-                    var arr = [];
-
-                    $menu
-                        .find('.dropdown-menu-item-sub')
-                        .filter("[data-level = "+level+"]")
-                        .each(function(){
-                            if( $(this).find("input[type='checkbox']").prop("checked") == false ) {
-                                arr.push(0);
-                            } else {
-                                arr.push(1);
-                            }
-                        });
-
-                        if (arr.indexOf( 0 ) < 0 ) {
-                            setHigherLevel(level, true);
-                        } else if ( arr.indexOf( 0 ) >= 0  ) {
-                            setHigherLevel(level, false);
-                        }
-
-                }
-
-                function setHigherLevel(level, boo){
-                    $menu
-                        .find('.dropdown-menu-item-higher')
-                        .filter("[data-level = "+level+"]").eq(0)
-                        .find("input[type='checkbox']").prop("checked", boo);
-                }
-
-
-
-                //Обновить значения
-                $inputHidden.val(''); hiddenArr = [];
-                $menu.find(o.item).each(function(){
-                    if ( $(this).find("input[type='checkbox']").prop("checked") == true ) {
-                        hiddenArr.push( $(this).data('value') );
-                    }
-                });
-                $inputHidden.val( hiddenArr );
-
-
-                //Обновили счетчик
-                $menu.find(o.item).each(function(){
-                    if( $(this).find("input[type='checkbox']").prop("checked") == true ){
-                        i++;
-                    }
-                });
-
-                if ( i > 0) {
-                    $buttonTitle
-                        .find('.dropdown-button-count')
-                        .html(" ("+i+")")
-                } else {
-                    $buttonTitle
-                        .find('.dropdown-button-count')
-                        .html("");
-
-                    $dropdown.removeClass('dropdown-changed');
-                }
-
-
-                e.preventDefault();
-
-
-
-            } else if ( $dropdown.hasClass('dropdown-lang') ) {
-                $menu.hide();
-                $dropdown.removeClass(o.active);
-                $dropdown.addClass('dropdown-changed');
-            } else {
-                $menu.hide();
-                $buttonTitle.html( $(this).find(o.itemTitle).html() );
-                $inputHidden.val( $(this).data(o.dataAttr)).change();
-                $dropdown.removeClass(o.active);
-                $dropdown.addClass('dropdown-changed');
-                e.preventDefault();
-            }
+            e.preventDefault();
         });
 
         function hideDropdown(e){
-            if( $(e.target).is( $el.selector ) || $(e.target).is($el.selector + ' *')) return;
+            if( $(e.target).is(o.dropdown) || $(e.target).is(o.dropdown+' *')) return;
             $(o.menu).hide();
             $(window).off('click', hideDropdown);
-            $( $el.selector ).removeClass(o.active);
+            $(o.dropdown).removeClass(o.active);
         }
 
-
-
-
-        this.refresh = function(el){
-
-            var $el = $(el);
-
-            $el.each(function(){
-
-                var $thisEl = $(this),
-                    $thisMenu = $thisEl.find('.dropdown-menu'),
-                    $thisInputHidden = $thisEl.find('.dropdown-hidden'),
-                    $thisInputHiddenArr = [],
-                    $thisItem = $thisEl.find('.dropdown-menu-item'),
-                    $thisButtonTitle = $thisEl.find('.dropdown-button-title'),
-                    $thisItemHtml;
-
-                if ( hasValue( $thisEl ) ) {
-                    if ( $thisEl.hasClass('dropdown-multi') ) {
-                        $thisInputHiddenArr = $thisInputHidden.val().split(',');
-                        $thisInputHidden.val('');
-                        for (var i = 0; i < $thisInputHiddenArr.length; i++) {
-                            $thisItem.each(function(){
-                                if( $(this).data('value') == $thisInputHiddenArr[i] ){
-                                    $(this).trigger('click');
-                                    $thisMenu.hide();
-                                }
-                            });
-                        }
-                    } else {
-                        $thisItem.each(function(){
-                            if( $(this).data('value') == $thisInputHidden.val() )
-                               $thisEl.addClass('dropdown-changed');
-                        });
-                        $thisItemHtml = $thisItem.filter(" [ data-value = " + $thisInputHidden.val() + " ] ").eq(0).html();
-                        $thisButtonTitle.html( $thisItemHtml );
-                    }
-                }
-
-            });
-
-            function hasValue(el){
-                var val = el.find('.dropdown-hidden').val();
-                return !val || /^\s*$/.test(val) ? false : true;
-            }
-
-        };
-
-        this.refresh('.dropdown');
-
-
-
         return this.each(function(){
-            var $el = $(this);
             $(this).data("dropdownOptions", o);
-            $(this).data("dropdownButtonTitle", $(this).find(o.buttonTitle).html() );
+            $buttonTitle = $el.find(o.buttonTitle);
+            $inputHidden = $el.find(o.inputHidden);
+            if( $inputHidden.val() ){
+                $item = $el.find(o.item).filter("[data-"+o.dataAttr+" = "+$inputHidden.val()+" ]");
+                $buttonTitle.html( $item.html() )
+            }
         });
-
-
     }
-
-
 
 
 
@@ -454,17 +260,10 @@
           }
         };
 
-        //this.removeMarkers
-        //this.refreshMarkers
 
         return this;
 
     };
-
-
-
-
-
 
 
 
@@ -560,17 +359,8 @@
                 }
               }
 
-
-
         });
-
-
-
-
-    }
-
-
-
+    };
 
 
 

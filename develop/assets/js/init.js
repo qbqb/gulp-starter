@@ -66,6 +66,11 @@ $(document).ready(function() {
 
     });
 
+    //slider.goToPrevSlide();
+    //slider.goToNextSlide();
+    //slider.destroySlider();
+    //slider.goToSlide(i);
+
 
     $('.tabs-on').tabslet({
         animation: true
@@ -86,32 +91,32 @@ $(document).ready(function() {
         }
     });
 
-    $(".c-range").ionRangeSlider();
+    //$(".c-range").ionRangeSlider();
 
-    (function(){
+    // (function(){
 
-      $('.c-range-double').ionRangeSlider({
-          type:'double',
-          min:1000,
-          max:50000,
-          from:10000,
-          to:40000,
-          step: 1000,
-          prefix: "",
-          prettify: true,
-          onLoad:   function (obj) {callRange(obj);},
-          onChange: function (obj) {callRange(obj);}
-        });
+    //   $('.c-range-double').ionRangeSlider({
+    //       type:'double',
+    //       min:1000,
+    //       max:50000,
+    //       from:10000,
+    //       to:40000,
+    //       step: 1000,
+    //       prefix: "",
+    //       prettify: true,
+    //       onLoad:   function (obj) {callRange(obj);},
+    //       onChange: function (obj) {callRange(obj);}
+    //     });
 
-      function callRange(obj){
-        var $outer = obj.input.closest('.c-range-outer-simple'),
-            $outputMin = $outer.find('.c-range-output-min'),
-            $outputMax = $outer.find('.c-range-output-max');
-        $outputMin.val(obj.fromNumber);
-        $outputMax.val(obj.toNumber);
-      }
+    //   function callRange(obj){
+    //     var $outer = obj.input.closest('.c-range-outer-simple'),
+    //         $outputMin = $outer.find('.c-range-output-min'),
+    //         $outputMax = $outer.find('.c-range-output-max');
+    //     $outputMin.val(obj.fromNumber);
+    //     $outputMax.val(obj.toNumber);
+    //   }
 
-    })();
+    // })();
 
     //$('#myModal').modal();
 
@@ -147,8 +152,6 @@ $(document).ready(function() {
       $('body:eq(0)').addClass('ie7');
     }
 
-    $('body').stickTheFooter();
-
     var dropdown = window.dropdown = $('.dropdown-on').dropdown();
     //dropdown.refresh( '.dropdown' );
 
@@ -166,18 +169,91 @@ $(document).ready(function() {
       $(this).removeClass('hover');
     });
 
-    $('.input-control').focus(function() {
+    $('.input-control,textarea').focus(function() {
         $(this).parent().removeClass('error');
     });
 
-    $('#map1').googleMap({
-      mapOptions:{
-        scrollwheel: false,
-        draggable:true
+    $('.input-phone').keydown(function(e) {
+      if ( $(this).val() ){
+        $(this).addClass('hasVal');
+      } else {
+        $(this).removeClass('hasVal');
       }
-    }).init();
+    });
+
+    (function(){
+      var t,d;
+      $(window).resize( (function(){
+        var fn = function(){
+          t == undefined ? d = 0 : d = 50;
+          clearTimeout(t);
+          t = setTimeout(function(){
+            $('.text-overflow').dotdotdot({
+              ellipsis  : '... '
+            });
+          },d);
+        };
+        fn();
+        return fn;
+      })() );
+    })();
+
+
+
+    $('#map1').googleMap().init();
+
+
+    //Form
+    (function(){
+
+      $('.g-form').submit(function(e){
+        e.preventDefault();
+
+        var $form = $(this),
+            $inputs = $form.find('.input-control, textarea'),
+            $inputMail = $form.find('.input-mail:eq(0)'),
+            hasError = false, val;
+
+        $inputs.each(function(){
+          val = $(this).val();
+          if ( isBlank(val) ){
+            $(this).parent().addClass('error');
+            hasError = true;
+            return;
+          }
+        });
+
+        if( !isMail( $inputMail.val() ) ) {
+          $inputMail.parent().addClass('error');
+          hasError = true;
+        }
+
+        if (!hasError) {
+          return true;
+        } else {
+          return false;
+        }
+
+        // for (var i = 0; i <= 1; i++) {
+        //   $('.g-form')[i].reset();
+        // };
+
+      });
+
+      function isBlank(str) {return (!str || /^\s*$/.test(str)); }
+      function isMail(str) {return /^\w+@\w+\.\w{2,4}$/i.test(str); }
+
+    })();
+
+
+
+
+
 
 
 
 
 });
+
+
+
