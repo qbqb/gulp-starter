@@ -19,16 +19,14 @@ var autoprefixer = require('gulp-autoprefixer');
 // var cache = require('gulp-cache');
 // var path = require('path');
 // var watch = require('gulp-watch');
-// var clean = require('gulp-clean');
+//var clean = require('gulp-clean');
 
 
 // Функция обработки ошибок
-// handleError = function(err) {
-//     gutil.log(err);
-//     gutil.beep();
-// };
-
-
+handleError = function(err) {
+    gutil.log(err);
+    gutil.beep();
+};
 
 
 // Локальный сервер
@@ -45,7 +43,7 @@ gulp.task('webserver', function() {
 gulp.task('less', function () {
   gulp.src('develop/assets/less/styles.less')
     .pipe(less())
-    //.on('error', handleError)
+    .on('error', handleError)
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
     .pipe(rename('styles.css'))
     // .pipe(minifyCSS({
@@ -73,7 +71,7 @@ gulp.task('twig-compile', function () {
 //Копируем скрипты
 gulp.task('js', function() {
     gulp.src('develop/assets/js/**/*')
-        //.on('error', handleError)
+        .on('error', handleError)
         // .pipe(concat('all.js'))
         // .pipe(gulp.dest('./dist'))
         // .pipe(rename('all.min.js'))
@@ -85,7 +83,7 @@ gulp.task('js', function() {
 //Копируем изображения и сразу их обновляем
 gulp.task('images', function() {
     gulp.src('develop/assets/images/**/*')
-        //.on('error', handleError)
+        .on('error', handleError)
         //.pipe(imagemin())
         .pipe(gulp.dest('public/assets/images'));
 });
@@ -110,25 +108,36 @@ gulp.task('sprite', function () {
 //Копируем шрифты
 gulp.task('fonts', function() {
     gulp.src('develop/assets/less/libs/fonts/**/*')
+        .on('error', handleError)
         .pipe(gulp.dest('public/assets/css/fonts'));
 });
 
 
 
 
-//Очищаем паблик
+//Очищаем паблик (удаляются только файлы)
 gulp.task('clean', function(cb) {
-    del(['public/*', 'public/assets/css', 'public/assets/css/fonts', 'public/assets/js', 'public/assets/images/**/*'], cb)
+    del(['public/**/*.*'], cb);
+});
+
+//Очищаем паблик (удаляются только файлы)
+gulp.task('c', function(cb) {
+    del(['public/**/*']);
 });
 
 
-gulp.task('r', function() {
+
+//Очищаем релиз
+gulp.task('cleanr', function(cb) {
+    del(['release/**/*', 'release/**/*.*'], cb);
+});
+
+//Копируем в релиз
+gulp.task('rel', function(cb) {
     gulp.src('public/**/*')
         .pipe(gulp.dest('release'));
 });
-gulp.task('c', function(cb) {
-    del(['release/**/*']);
-});
+
 
 
 
@@ -138,11 +147,15 @@ gulp.task("watch", function(){
     gulp.watch('develop/**/*.twig', ['twig-compile']);
     gulp.watch('develop/assets/images/**/*', ['images']);
     gulp.watch('develop/assets/images/sprite/*.png', ['sprite']);
-    gulp.watch(['develop/assets/js/**/*', '!develop/assets/js/libs/fancybox/**/*'], ['js']);
+    gulp.watch(['develop/assets/js/*', '!develop/assets/js/libs/**/*'], ['js']); //следить только за скриптами в корневой папке
 });
 
 gulp.task('build', ['twig-compile', 'less', 'images', 'js', 'sprite', 'fonts']);
 
 gulp.task('default', ['clean'], function() {
     gulp.start('build', 'watch', 'webserver');
+});
+
+gulp.task('r', ['cleanr'], function() {
+    gulp.start('rel');
 });

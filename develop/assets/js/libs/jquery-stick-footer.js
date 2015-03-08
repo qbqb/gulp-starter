@@ -9,4 +9,5 @@
     };
     fn(); return fn;
   })());
+  console.log('asd');
 })();
