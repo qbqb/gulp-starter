@@ -146,14 +146,20 @@ gulp.task("watch", function(){
     gulp.watch(['develop/assets/less/**/*', '!develop/assets/less/libs/bootstrap/**/*', '!develop/assets/less/libs/fonts/**/*'], ['less']);
     gulp.watch('develop/**/*.twig', ['twig-compile']);
     gulp.watch('develop/assets/images/**/*', ['images']);
+    /*
+      - При переименовании не удаляет старый файл, а создает новый с обновленным именем. При следующей инициализации ненужный файл исчезает без ошибок.
+      - Не удаляет файл. При следующей инициализации ненужный файл исчезает без ошибок.
+      - Умеет создавать новую папку и сразу видит те файлы, которые в нее перекидываем.
+      - При удаленнии папки с картинками ничего не происходит.  При следующей инициализации ненужная папка остается, а файлы исчезают. Чтобы удалить ненужные папки можно воспользоваться командой gulp c
+    */
     gulp.watch('develop/assets/images/sprite/*.png', ['sprite']);
-    gulp.watch(['develop/assets/js/*', '!develop/assets/js/libs/**/*'], ['js']); //следить только за скриптами в корневой папке
+    gulp.watch(['develop/assets/js/*', '!develop/assets/js/libs/**/*'], ['js']); //следить только за скриптами в корневой папке. При добавлении новых скриптов перезапустить libs
 });
 
-gulp.task('build', ['twig-compile', 'less', 'images', 'js', 'sprite', 'fonts']);
+gulp.task('b', ['twig-compile', 'less', 'images', 'js', 'sprite', 'fonts']);
 
 gulp.task('default', ['clean'], function() {
-    gulp.start('build', 'watch', 'webserver');
+    gulp.start('b', 'watch', 'webserver');
 });
 
 gulp.task('r', ['cleanr'], function() {
