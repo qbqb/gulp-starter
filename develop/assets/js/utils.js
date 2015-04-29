@@ -212,59 +212,6 @@
 
 
 
-    $.fn.googleMap = function (options) {
-
-        var el = this,
-            x = $(el).data('x'),
-            y = $(el).data('y'),
-            zoom = $(el).data('zoom'),
-            places = $(el).data('places'),
-            o = $.extend({
-
-              mapOptions: {
-                scrollwheel: false,
-                draggable:true
-              },
-
-              markerOptions: {}
-
-            }, options);
-
-        this.init = function () {
-
-          if( !el[0] ) return;
-
-          var map = new google.maps.Map(el.get(0), $.extend({
-            zoom: zoom,
-            center: new google.maps.LatLng(x, y)
-          }, o.mapOptions));
-
-          this.addMarkers(map, places)
-
-          el.data('map', map);
-
-          return el;
-
-        };
-
-        this.addMarkers = function(_map, _places){
-          var latlngbounds = new google.maps.LatLngBounds();
-          for (var i = 0; i < _places.length; i++) {
-              var myLatLng = new google.maps.LatLng(_places[i][0], _places[i][1]);
-              latlngbounds.extend(myLatLng);
-              var marker = new google.maps.Marker($.extend({
-                position: myLatLng,
-                map: _map
-                //title:_places[i][2]
-              }, o.markerOptions));
-          }
-        };
-
-
-        return this;
-
-    };
-
 
 
 
@@ -362,6 +309,62 @@
         });
     };
 
+
+
+
+     /*   $.fn.googleMap = function (options) {
+
+            var el = this,
+                x = $(el).data('x'),
+                y = $(el).data('y'),
+                zoom = $(el).data('zoom'),
+                places = $(el).data('places'),
+                o = $.extend({
+
+                  mapOptions: {
+                    scrollwheel: false,
+                    draggable:true
+                  },
+
+                  markerOptions: {}
+
+                }, options);
+
+            this.init = function () {
+
+              if( !el[0] ) return;
+
+              var map = new google.maps.Map(el.get(0), $.extend({
+                zoom: zoom,
+                center: new google.maps.LatLng(x, y)
+              }, o.mapOptions));
+
+              this.addMarkers(map, places)
+
+              el.data('map', map);
+
+              return el;
+
+            };
+
+            this.addMarkers = function(_map, _places){
+              var latlngbounds = new google.maps.LatLngBounds();
+              for (var i = 0; i < _places.length; i++) {
+                  var myLatLng = new google.maps.LatLng(_places[i][0], _places[i][1]);
+                  latlngbounds.extend(myLatLng);
+                  var marker = new google.maps.Marker($.extend({
+                    position: myLatLng,
+                    map: _map
+                    //title:_places[i][2]
+                  }, o.markerOptions));
+              }
+            };
+
+
+            return this;
+
+        };
+    */
 
 
 

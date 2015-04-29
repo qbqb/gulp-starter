@@ -1,4 +1,3 @@
-// Инициализируем плагины
 var gulp = require('gulp');
 var less = require('gulp-less');
 var webserver = require('gulp-webserver');
@@ -6,40 +5,38 @@ var del = require('del');
 var rename = require('gulp-rename');
 var spritesmith = require('gulp.spritesmith');
 var autoprefixer = require('gulp-autoprefixer');
-
-//var gutil = require('gulp-util');
-
+// var gutil = require('gulp-util');
 // var imagemin = require('gulp-imagemin');
 // var concat = require('gulp-concat');
 // var uglify = require('gulp-uglify');
 // var minifyCSS = require('gulp-minify-css');
-
 // var nib = require('nib');
 // var cssbeautify = require('gulp-cssbeautify');
 // var cache = require('gulp-cache');
 // var path = require('path');
 // var watch = require('gulp-watch');
-//var clean = require('gulp-clean');
+// var clean = require('gulp-clean');
 
 
-// Функция обработки ошибок
+//Errors log
 handleError = function(err) {
     gutil.log(err);
     gutil.beep();
 };
 
 
-// Локальный сервер
+//Server
 gulp.task('webserver', function() {
     gulp.src('public')
     .pipe(webserver({
+        //host: '192.168.120.137',
         host: 'localhost',
         port: 3000,
         livereload: true
     }));
 });
 
-//Стили
+//Less
 gulp.task('less', function () {
   gulp.src('develop/assets/less/styles.less')
     .pipe(less())
@@ -53,22 +50,23 @@ gulp.task('less', function () {
     .pipe(gulp.dest('public/assets/css'));
 });
 
+
 //Twig
 gulp.task('twig-compile', function () {
     'use strict';
     var twig = require('gulp-twig');
     return gulp.src(['develop/pages/**/*.twig', '!./develop/pages/layouts/*.twig'])
-        .pipe(twig({
-            data: {
-                title: 'Gulp and Twig'
-            }
-        }))
-        //.on('error', handleError)
-        .pipe(gulp.dest('public'));
+      .pipe(twig({
+          data: {
+              title: 'Gulp and Twig'
+          }
+      }))
+      //.on('error', handleError)
+      .pipe(gulp.dest('public'));
 });
 
 
-//Копируем скрипты
+//Copy scripts
 gulp.task('js', function() {
     gulp.src('develop/assets/js/**/*')
         .on('error', handleError)
@@ -79,8 +77,7 @@ gulp.task('js', function() {
         .pipe(gulp.dest('public/assets/js'));
 });
 
-
-//Копируем изображения и сразу их обновляем
+//Copy images
 gulp.task('images', function() {
     gulp.src('develop/assets/images/**/*')
         .on('error', handleError)
@@ -92,7 +89,7 @@ gulp.task('images', function() {
 // });
 
 
-//Собираем спрайт
+//Sprite
 gulp.task('sprite', function () {
     var spriteData = gulp.src('develop/assets/images/sprite/*.png').pipe(spritesmith({
         imgName: 'sprite.png',
@@ -105,7 +102,7 @@ gulp.task('sprite', function () {
     spriteData.css.pipe(gulp.dest('develop/assets/less/libs/'));
 });
 
-//Копируем шрифты
+//Copy fonts
 gulp.task('fonts', function() {
     gulp.src('develop/assets/less/libs/fonts/**/*')
         .on('error', handleError)
@@ -114,59 +111,50 @@ gulp.task('fonts', function() {
 
 
 
-
-//Очищаем паблик (удаляются только файлы)
-gulp.task('clean', function(cb) {
-    del(['public/**/*.*'], cb);
+//Clean public files
+gulp.task('cp', function(cb) {
+  del(['public/**/*.*'], cb);
 });
 
-//Очищаем паблик (удаляются только файлы)
-gulp.task('c', function(cb) {
-    del(['public/**/*']);
-});
-
-
-
-//Очищаем релиз
-gulp.task('cleanr', function(cb) {
-    del(['release/**/*', 'release/**/*.*'], cb);
-});
-
-//Копируем в релиз
-gulp.task('rel', function(cb) {
-    gulp.src('public/**/*')
-        .pipe(gulp.dest('release'));
+//Clean public files and folders
+gulp.task('cpf', function(cb) {
+  del(['public/**/*']);
 });
 
 
-//Очищаем паблик (удаляются только файлы)
+//Clean release files
 gulp.task('cr', function(cb) {
-    del(['release/**/*.*'], cb);
+  del(['release/**/*.*'], cb);
+});
+
+//Clean release files and folders
+gulp.task('crf', function(cb) {
+  del(['release/**/*'], cb);
+});
+
+//Copy release
+gulp.task('release', function(cb) {
+  gulp.src('public/**/*')
+      .pipe(gulp.dest('release'));
 });
 
 
 
-//Следим
+//Watch
 gulp.task("watch", function(){
-    gulp.watch(['develop/assets/less/**/*', '!develop/assets/less/libs/bootstrap/**/*', '!develop/assets/less/libs/fonts/**/*'], ['less']);
-    gulp.watch('develop/**/*.twig', ['twig-compile']);
-    gulp.watch('develop/assets/images/**/*', ['images']);
-    /*
-      - При переименовании не удаляет старый файл, а создает новый с обновленным именем. При следующей инициализации ненужный файл исчезает без ошибок.
-      - Не удаляет файл. При следующей инициализации ненужный файл исчезает без ошибок.
-      - Умеет создавать новую папку и сразу видит те файлы, которые в нее перекидываем.
-      - При удаленнии папки с картинками ничего не происходит.  При следующей инициализации ненужная папка остается, а файлы исчезают. Чтобы удалить ненужные папки можно воспользоваться командой gulp c
-    */
-    gulp.watch('develop/assets/images/sprite/*.png', ['sprite']);
-    gulp.watch(['develop/assets/js/*', '!develop/assets/js/libs/**/*'], ['js']); //следить только за скриптами в корневой папке. При добавлении новых скриптов перезапустить libs
+  gulp.watch(['develop/assets/less/**/*', '!develop/assets/less/libs/bootstrap/**/*', '!develop/assets/less/libs/fonts/**/*'], ['less']);
+  gulp.watch('develop/**/*.twig', ['twig-compile']);
+  gulp.watch('develop/assets/images/**/*', ['images']);
+  gulp.watch('develop/assets/images/sprite/*.png', ['sprite']);
+  gulp.watch(['develop/assets/js/*', '!develop/assets/js/libs/**/*'], ['js']);
 });
 
 gulp.task('b', ['twig-compile', 'less', 'images', 'js', 'sprite', 'fonts']);
 
-gulp.task('default', ['clean'], function() {
+gulp.task('default', ['cp'], function() {
     gulp.start('b', 'watch', 'webserver');
 });
 
-gulp.task('r', ['cleanr'], function() {
-    gulp.start('rel');
+gulp.task('r', ['cr'], function() {
+    gulp.start('release');
 });
