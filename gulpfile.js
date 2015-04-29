@@ -139,6 +139,11 @@ gulp.task('rel', function(cb) {
 });
 
 
+//Очищаем паблик (удаляются только файлы)
+gulp.task('cr', function(cb) {
+    del(['release/**/*.*'], cb);
+});
+
 
 
 //Следим

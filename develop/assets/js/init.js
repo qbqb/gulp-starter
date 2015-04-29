@@ -140,7 +140,7 @@ $(document).ready(function() {
     // [ bowser.windowsphone ]
     // [ bowser.ios ] [ bowser.iphone ] [ bowser.ipad ] [ bowser.ipod ]
 
-    if ( bowser.mobile ) {
+    if ( bowser.mobile || bowser.tablet || bowser.touchpad ) {
       $('body:eq(0)').addClass('mobile');
     }
 
